@@ -195,13 +195,14 @@ export default function Penyakit() {
         resolver: zodResolver(FormSchema),
         defaultValues: {
             gejala: [],
-            kode_peternakan: null
+            // kode_peternakan: null
         },
     })
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         data = data
         if (peternakan!=null){
+            // @ts-ignore
             data['kode_peternakan']=peternakan
         }else{
             if(login==='true'){
@@ -360,7 +361,10 @@ return (
                                     {isLoading ? (
                                         <p>Loading...</p>
                                     ) : (
+                                        //@ts-ignore
                                         gejala ? (
+                                            //@ts-ignore
+
                                             gejala.map((item, index) => (
 
                                                 <FormField

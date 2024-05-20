@@ -3,25 +3,8 @@
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import React, {useEffect} from "react";
-import {Toaster} from "@/components/ui/toaster";
-import {Button} from "@/components/ui/button";
 import {ChevronDown, History, List, ListCollapse, Loader2, LogOut, Settings, User} from "lucide-react";
-import {Nav} from "@/components/Nav";
-import {
-    DropdownMenu,
-    DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator
-} from "@/components/ui/breadcrumb";
+
 import {redirect, useRouter} from "next/navigation";
 import {cn} from "@/lib/utils";
 import {className} from "postcss-selector-parser";
@@ -30,7 +13,7 @@ import {Header} from "@/lib/header";
 const inter = Inter({ subsets: ["latin"] });
 const BE_URL = process.env.NEXT_PUBLIC_BE_URL
 
-export function cekLogin(){
+function cekLogin(){
 
     if (typeof window === "undefined") return null;
     let login : string | null =''

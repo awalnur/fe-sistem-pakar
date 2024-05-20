@@ -21,8 +21,10 @@ import {
   DropdownMenuSeparator, DropdownMenuShortcut,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import Image from "next/image";
 
 
+// @ts-ignore
 export default function RootLayout({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
@@ -52,7 +54,7 @@ export default function RootLayout({ children }) {
       <body className="font-inter">
       <nav className="fixed backdrop-blur border-b-[#f0f0f050] border-b top-0 z-50 flex w-full bg-transparent lg:px-16 lg:py-3 xl:px-64">
         <div className="nav-logo">
-          <img className="h-12" src="/img/logo-nav.png" alt="Logo" />
+          <Image alt={'logo Image'}  className={"h-12"} src="/img/logo-nav.png" width={100} height={100}/>
         </div>
         <div className="text-black ml-16 my-auto flex flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">
           <Link href="/">Homepage</Link>

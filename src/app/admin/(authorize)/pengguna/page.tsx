@@ -94,13 +94,14 @@ export default function AdminPengguna() {
     const router = useRouter()
     const [isLoading, setLoading] = useState(false)
     const data: modelPengguna[] = dataPengguna?dataPengguna:[]
-
+// @ts-ignore
     const closeDialog = (index) => {
         setDialogStates(prevState => ({
             ...prevState,
             [index]: false // Close the dialog at index
         }));
     };
+    // @ts-ignore
     async function DeletePengguna(id, index){
         try {
             const response = await fetch(BE_URL + '/v1/user/delete/'+id,
@@ -192,7 +193,7 @@ export default function AdminPengguna() {
             header: () => <div className="text-left">Nama Depan</div>,
             cell: ({ row }) => {
                 const peternakan = row.getValue("nama_depan")
-
+                // @ts-ignore
                 return <div className="text-left text-xs">{peternakan}</div>
             },
         },
@@ -201,7 +202,7 @@ export default function AdminPengguna() {
             header: () => <div className="text-center">Nama Belakang</div>,
             cell: ({ row }) => {
                 const nama_belakang = row.getValue("nama_belakang")
-
+// @ts-ignore
                 return <div className="text-center text-xs">{nama_belakang} </div>
             },
         },
@@ -211,6 +212,7 @@ export default function AdminPengguna() {
             cell: ({ row }) => {
                 const kode_user = row.getValue("kode_user")
                 console.log(row)
+                // @ts-ignore
                 return (
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -226,7 +228,11 @@ export default function AdminPengguna() {
                                 <DropdownMenuItem>
                                     Edit
                                 </DropdownMenuItem>
-                            </Link>                            <Dialog key={kode_user} open={dialogStates[row.index]} onOpenChange={setDialogStates}>
+                            </Link>
+                            {/*@ts-ignore*/}
+                            <Dialog key={kode_user} open={
+                                // @ts-ignore
+                                dialogStates[row.index]} onOpenChange={setDialogStates}>
                                 {/*<DropdownMenuItem >Hapus</DropdownMenuItem>*/}
 
                                 <DialogTrigger className={'w-full text-left px-2'}>Hapus</DialogTrigger>

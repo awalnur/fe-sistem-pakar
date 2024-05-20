@@ -1,12 +1,4 @@
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+
 import React, {useState} from "react";
 import {
     Dialog,
@@ -21,15 +13,10 @@ import {
 import {Trash2} from "lucide-react";
 import {DialogBody} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
 import {Button} from "@/components/ui/button";
-
+// @ts-ignore
 const DeleteDialog = ({ id, name }) => {
     const [selectedOption, setSelectedOption] = useState('');
 
-    const handleSelectChange = (event) => {
-        const selectedValue = event.valueOf();
-        setSelectedOption(selectedValue);
-        onSelect(selectedValue); // Trigger onSelect callback with selected value
-    };
     return (
         <Dialog>
             <DialogTrigger className={'absolute mx-4 right-0 px-1 aspect-square bg-red-600 text-white border-white rounded-md h-8'}><Trash2/></DialogTrigger>
@@ -41,10 +28,12 @@ const DeleteDialog = ({ id, name }) => {
                 </DialogHeader>
                 <DialogBody>
                     Hapus Lokasi peternakan
+                    {/*@ts-ignore*/}
                     <b> {item?item.nama_peternakan:null}</b>
                 </DialogBody>
                 <DialogFooter>
                     <div className={'flex w-full gap-5 justify-items-end'}>
+                        {/*@ts-ignore*/}
                         <Button variant={'destructive'} className={'ml-auto'} onClick={()=>HapusFarm(item.kode_peternakan)}>Hapus</Button>
                         <DialogClose  className={'border rounded-lg px-5 py-1.5'}>Batalkan</DialogClose>
                     </div>

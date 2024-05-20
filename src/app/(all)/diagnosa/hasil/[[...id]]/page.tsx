@@ -15,9 +15,9 @@ export default function ResultDiagnose() {
     const [result, setData] = useState(null);
     const [isLoading, setLoading] = useState(true);
 
-    const router = usePathname().split('/')
+    const router = usePathname()
     const login = cekLogin()
-    const id_riwayat = router[router.length-1]
+    const id_riwayat = router[router.length-1].split('/')
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -49,6 +49,9 @@ export default function ResultDiagnose() {
         fetchData();
     }, []);
 
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
         <main className="block">
             <div className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24 md:px-16 px-4 ">
@@ -72,7 +75,10 @@ export default function ResultDiagnose() {
                             <div id={'title'}>
                                 <h2 className={'text-md font-medium my-2'}>Nama Penyakit :</h2>
                                 <h1 className={'text-lg font-bold border p-3 rounded-xl bg-gray-50'}>
-                                    {result?(result.penyakit.nama_penyakit):''}
+                                    {
+                                        // @ts-ignore
+                                        result?(result.penyakit.nama_penyakit):''
+                                    }
                                     {/*<label className={'italic text-sm text-gray-600 px-2 font-normal '}>*/}
                                     {/*    (Avian influenza)*/}
                                     {/*</label>*/}
@@ -83,7 +89,8 @@ export default function ResultDiagnose() {
                                 <h2 className={'text-md font-medium my-2'}>Gejala Yang terjadi :</h2>
                                 <div className={'gejala-terjadi p-3 border rounded-lg px-7' }>
                                     <ul className={'list list-inside list-disc'}>
-                                        {
+                                        {                                        // @ts-ignore
+
                                             result ? (result.gejala.map((item, index) => (
                                                 <li key={index} className={'list-item p-2.5 border-b'}>
                                                     {item}
@@ -96,7 +103,10 @@ export default function ResultDiagnose() {
                             <div className={'Deskripsi my-2'}>
                             <h2 className={'font-medium text-md my-2 pt-5'}> Tentang Penyakit</h2>
                                 <hr className={'w-4/12 mb-2'}/>
-                                <p className={'text-justify  py-2'} dangerouslySetInnerHTML={{__html:result?(result.penyakit.definisi):''}}>
+                                <p className={'text-justify  py-2'} dangerouslySetInnerHTML={
+                                    // @ts-ignore
+
+                                    {__html:result?(result.penyakit.definisi):''}}>
 
                                 </p>
                             </div>
@@ -105,7 +115,10 @@ export default function ResultDiagnose() {
                             <div className={'Deskripsi my-2'}>
                                 <h2 className={'font-medium text-lg my-2'}> Penularan</h2>
                                 <hr className={'w-4/12 mb-2'}/>
-                                <p className={'text-justify py-2'}dangerouslySetInnerHTML={{__html:result?(result.penyakit.penularan):''}}>
+                                <p className={'text-justify py-2'} dangerouslySetInnerHTML={
+                                    // @ts-ignore
+
+                                    {__html:result?(result.penyakit.penularan):''}}>
                                     {/*{*/}
                                     {/*    result?(result.penyakit.penularan):'-'*/}
                                     {/*}*/}
@@ -114,7 +127,11 @@ export default function ResultDiagnose() {
                             <div className={'Deskripsi my-2'}>
                                 <h2 className={'font-medium text-lg my-2'}> Pencegahan</h2>
                                 <hr className={'w-4/12 mb-2'}/>
-                                <p className={'text-justify py-2'}dangerouslySetInnerHTML={{__html:result?(result.penyakit.pencegahan):''}}>
+                                <p className={'text-justify py-2'}dangerouslySetInnerHTML={
+                                    // @ts-ignore
+
+                                    {__html:result?(result.penyakit.pencegahan):''}
+                                }>
                                     {/*{*/}
                                     {/*    result ? (result.penyakit.pencegahan) : '-'*/}
                                     {/*}*/}
@@ -135,8 +152,11 @@ export default function ResultDiagnose() {
                                 <h1 className={'font-bold'}>Presentase Tingkat Kepercayaan : </h1>
                                 <div className={'presentase px-20'}>
                                     {" "}
-                                    <CircularProgressbar
-                                        value={(result ? (result.persentase):(0))}
+                                    <CircularProgressbar                                        // @ts-ignore
+
+                                        value={(result ? (result.persentase):(0))}                                        // @ts-ignore
+                                        // @ts-ignore
+
                                         text={(result ? (result.persentase):(0))+`%`}
                                     />
                                 </div>

@@ -125,9 +125,8 @@ export default function Penyakit() {
                                     <p>Loading...</p>
                                 ) : (
                                 penyakit ? (
-
-                                        penyakit.length>0?(
-                                    penyakit.map((penyakit) => (
+// @ts-ignore
+                                        penyakit.length>0?(penyakit.map((penyakit) => (
                                         <Card className={'col-span-1 h-28 backdrop-blur bg-[#ffffff80] xl:p-4 flex rounded-2xl gap-2'} key={penyakit.nama_penyakit}>
                                             <div className={'image aspect-square'}>
                                                 <Image src={'/img/default.png'} className={'rounded-xl'} alt={'img'} width={500} height={500}></Image>

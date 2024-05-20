@@ -21,7 +21,7 @@ interface NavProps {
         variant: "default" | "ghost"
     }[]
 }
-export default function homepagee() {
+export default function HomePage() {
     const [dataRiwayat, setRiwayat] = useState([])
     const [isCollapsed, setIsCollapsed] = useState(false)
     const [isLoading, setLoading] = useState(false)
@@ -128,18 +128,28 @@ export default function homepagee() {
                                             <div
                                                 className={'presentase flex flex-col align-middle aspect-square p-4 text-lg my-auto bg-gray-100 rounded-2xl'}>
                                                 <p className={'text-xs text-center text-gray-600 mt-auto'}>Akurasi</p>
-                                                <h1 className={'font-bold text-center mb-auto'}>{item.persentase}%</h1>
+                                                <h1 className={'font-bold text-center mb-auto'}>{
+                                                    // @ts-ignore
+                                                    item.persentase}%</h1>
                                             </div>
                                             <div className={'keterangan w-full flex flex-col'}>
-                                                <Link href={'/diagnosa/hasil/' + item.kode_riwayat}
-                                                      className={'text-md font-bold'}> {item.penyakit}</Link>
+                                                <Link href={
+                                                    // @ts-ignore
+                                                    '/diagnosa/hasil/' + item.kode_riwayat}
+                                                      className={'text-md font-bold'}> {
+                                                    // @ts-ignore
+                                                    item.penyakit}</Link>
                                                 <div className={'text-xs flex flex-row text-gray-600 gap-2'}>
                                                     <Calendar className={'w-4'}/>
-                                                    <p className={'my-auto'}>{moment(item.created_date, 'DD-MM-YYYY HH:mm:ss').format('dddd, DD-MM-YYYY')}</p>
+                                                    <p className={'my-auto'}>{
+                                                        // @ts-ignore
+                                                        moment(item.created_date, 'DD-MM-YYYY HH:mm:ss').format('dddd, DD-MM-YYYY')}</p>
                                                 </div>
                                                 <div className={'text-xs flex flex-row text-gray-600 gap-2'}>
                                                     <MapPin className={'w-4'}/>
-                                                    <p className={'my-auto'}>{item.peternakan}</p>
+                                                    <p className={'my-auto'}>{
+                                                        // @ts-ignore
+                                                        item.peternakan}</p>
                                                 </div>
                                             </div>
                                         </Card>

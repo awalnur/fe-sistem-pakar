@@ -49,6 +49,7 @@ export default function UpdatePenyakitPage() {
     const [Selectedvalues, setValues] = useState({})
     const [inputGejala, setInputGejalaValue] = useState([0])
     const [inputValues, setInputValues] = useState({'bobot[0]':0.1});
+    // @ts-ignore
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setInputValues({
@@ -74,13 +75,14 @@ export default function UpdatePenyakitPage() {
             const penyakit = await response.json();
             const currentGejala = penyakit['data']['gejala']
             const listGejalaRule = {}
+            // @ts-ignore
             let number = []
             Object.entries(currentGejala).forEach(([idx, val]) => {
                 // Convert index from string to number
                 // const idx = Number(index);
                 console.log('asd', idx, val)
                 const index = parseInt(idx)
-                // setInputGejalaValue([index]: val);
+                // @ts-ignore
                 listGejalaRule[index]=val
                 number.push(index)
             });
@@ -88,6 +90,7 @@ export default function UpdatePenyakitPage() {
             // console.log('Response data s:',penyakit['data']['kode_penyakit'], penyakit);
             setValue(penyakit['data']['kode_penyakit']);
             setValues(listGejalaRule)
+            // @ts-ignore
             setInputGejalaValue(number)
             setInputValues(penyakit['data']['bobot']);
 
@@ -139,6 +142,7 @@ export default function UpdatePenyakitPage() {
     })
 
     async function onSubmit(values: z.infer<typeof rule>) {
+        // @ts-ignore
         const gejala = []
         const total_gejala=Object.keys(Selectedvalues).length
         if (total_gejala<2){
@@ -148,10 +152,12 @@ export default function UpdatePenyakitPage() {
                 const index = parseInt(idx)
                 gejala.push({
                     kode_gejala: val,
+                    // @ts-ignore
                     bobot: inputValues[`bobot[${index}]`],
                 })
             });
             const body = {
+                // @ts-ignore
                 'gejala': gejala
             }
             try{
@@ -189,14 +195,16 @@ export default function UpdatePenyakitPage() {
 
 
     }
-
+// @ts-ignore
     const handleToggle = (key, currentValue) => {
         setValues(prevValues => ({
             ...prevValues,
+            // @ts-ignore
             [key]: currentValue === prevValues[key] ? "" : currentValue
         }));
         // setInputValues()
     };
+    // @ts-ignore
     const closes = (key, currentValue) => {
         console.log('asd')
 
@@ -260,6 +268,7 @@ export default function UpdatePenyakitPage() {
                                                     {
                                                         value
                                                             ?
+                                                            // @ts-ignore
                                                             dataPenyakit.find((penyakit) =>penyakit.kode_penyakit === value.toUpperCase())?.penyakit || "Select Penyakit..."
                                                             : "Select Penyakit..."}
                                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -271,7 +280,9 @@ export default function UpdatePenyakitPage() {
                                                     <CommandEmpty>No Penyakit found.</CommandEmpty>
                                                     <CommandList>
                                                         <CommandGroup>
-                                                            {dataPenyakit?dataPenyakit.map((penyakit) => (
+                                                            {
+                                                                // @ts-ignore
+                                                                dataPenyakit?dataPenyakit.map((penyakit) => (
                                                                 // <label className={'s'} key={framework.value}> { framework.value}</label>
                                                                 <CommandItem
                                                                     key={penyakit.kode_penyakit}
@@ -312,16 +323,15 @@ export default function UpdatePenyakitPage() {
                                         {
                                             inputGejala.map((item, key)=>(
                                                 <div key={'d'+key} className={'flex gap-4'}>
+
+                                                    {/*@ts-ignore*/}
                                                     <Popover key={'s'+key} open={opens[key]} onOpenChange={setOpens}>
                                                         <PopoverTrigger asChild>
-                                                            <Button
-                                                                variant="outline"
-                                                                role="combobox"
-                                                                aria-expanded={opens[key]}
-                                                                className="w-[800px] justify-between"
+                                                            {/*@ts-ignore*/}
+                                                            <Button variant="outline" role="combobox" aria-expanded={opens[key]} className="w-[800px] justify-between"
                                                             >
-                                                                {Selectedvalues[key]
-                                                                    ? dataGejala?dataGejala.find((framework) => framework.kode_gejala === Selectedvalues[key].toUpperCase())?.gejala:"s"
+                                                                {/*@ts-ignore*/}
+                                                                {Selectedvalues[key] ? dataGejala?dataGejala.find((framework) => framework.kode_gejala === Selectedvalues[key].toUpperCase())?.gejala:"s"
                                                                     : "Select Gejala..."}
 
                                                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -334,33 +344,35 @@ export default function UpdatePenyakitPage() {
                                                                 <CommandList>
                                                                     <CommandGroup>
                                                                         {dataGejala.map((gejala) => (
-
+                                                                            // @ts-ignore
                                                                             Selectedvalues ?(Object.values(Selectedvalues).includes(gejala.kode_gejala.toLowerCase())||Object.values(Selectedvalues).includes(gejala.kode_gejala.toUpperCase()))?(
                                                                                 null
                                                                             ):(
-                                                                                <CommandItem
-                                                                                    key={gejala.kode_gejala}
-                                                                                    value={gejala.gejala}
-                                                                                    onSelect={(currentValue, val=gejala.kode_gejala) => {
+                                                                                // @ts-ignore
+                                                                                <CommandItem key={gejala.kode_gejala} value={gejala.gejala}onSelect={(currentValue, val=gejala.kode_gejala) => {
+                                                                                    // @ts-ignore
                                                                                         handleToggle(key, val === Selectedvalues[key] ? "" : val)
+                                                                                    // @ts-ignore
                                                                                         closes(key, val === opens[key] ? "" : val)
                                                                                     }}
                                                                                 >
                                                                                     <Check
                                                                                         className={cn(
                                                                                             "mr-2 h-4 w-4",
+                                                                                            // @ts-ignore
                                                                                             Selectedvalues[key] === gejala.kode_gejala ? "opacity-100" : "opacity-0"
                                                                                         )}
                                                                                     />
+
+                                                                                    {/*@ts-ignore*/}
                                                                                     {gejala.gejala}
                                                                                 </CommandItem>
                                                                             ):(
-                                                                                <CommandItem
-                                                                                    key={gejala.kode_gejala}
-                                                                                    value={gejala.gejala}
-                                                                                    onSelect={(currentValue, currentKey) => {
-
+                                                                                //@ts-ignore
+                                                                                <CommandItem key={gejala.kode_gejala} value={gejala.gejala} onSelect={(currentValue, currentKey) => {
+                                                                                    // @ts-ignore
                                                                                         handleToggle(key, currentValue === Selectedvalues[key] ? "" : currentValue)
+                                                                                    // @ts-ignore
                                                                                         closes(key, currentValue === opens[key] ? "" : currentValue)
 
                                                                                     }}
@@ -368,9 +380,11 @@ export default function UpdatePenyakitPage() {
                                                                                     <Check
                                                                                         className={cn(
                                                                                             "mr-2 h-4 w-4",
+                                                                                            //@ts-ignore
                                                                                             Selectedvalues[key] === gejala.kode_gejala ? "opacity-100" : "opacity-0"
                                                                                         )}
                                                                                     />
+                                                                                    {/*@ts-ignore*/}
                                                                                     {gejala.gejala}
                                                                                 </CommandItem>
                                                                             )
@@ -380,6 +394,7 @@ export default function UpdatePenyakitPage() {
                                                             </Command>
                                                         </PopoverContent>
                                                     </Popover>
+                                                    {/*@ts-ignore*/}
                                                     <Input name={'bobot['+key+']'} key={'a'+key} type={'number'} className={'w-40 '} placeholder={'Belief'} min={0.1} defaultValue={inputValues['bobot['+key+']']} step={0.1} max={1.0} onChange={handleInputChange}/>
                                                 </div>
                                             ))

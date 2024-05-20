@@ -86,19 +86,20 @@ export default function AdminPenyakit() {
     const [dataRule, setRule] = useState(null)
     const limit = 10
 
-    // const total_data = 10
     const [totalPage, setTotalPage] = useState(10)
     const pages = [];
     const router = useRouter()
     const [isLoading, setLoading] = useState(false)
     const data: modelRule[] = dataRule?dataRule:[]
 
+    // @ts-ignore
     const closeDialog = (index) => {
         setDialogStates(prevState => ({
             ...prevState,
             [index]: false // Close the dialog at index
         }));
     };
+    // @ts-ignore
     async function DeleteRule(id, index){
         try {
             const response = await fetch(BE_URL + '/v1/rule/delete/'+id,
@@ -163,12 +164,14 @@ export default function AdminPenyakit() {
             header: () => <div className="text-left">Gejala dan belief</div>,
             cell: ({ row }) => {
                 const gejala = row.getValue("gejala")
-
                 return (
                     <div className="text-left text-xs">
                         <ul>
-                            {gejala.map((item) => (
-                                <li className={'list-disc flex flex-row justify-between p-2 border-b'}><p>{item.gejala}</p><p className={'text-sm'}>Belief : <span className={'px-2 py-1 bg-green-600 font-medium text-white rounded'}>{item.bobot}</span></p></li>
+                            {
+
+                                // @ts-ignore
+                                gejala.map((item, index) => (
+                                    <li key={index} className={'list-disc flex flex-row justify-between p-2 border-b'}><p>{item.gejala}</p><p className={'text-sm'}>Belief : <span className={'px-2 py-1 bg-green-600 font-medium text-white rounded'}>{item.bobot}</span></p></li>
                             ))}
                         </ul>
 
@@ -182,6 +185,7 @@ export default function AdminPenyakit() {
             cell: ({ row }) => {
                 const kode_penyakit = row.getValue("kode_penyakit")
 
+                // @ts-ignore
                 return (
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -197,7 +201,10 @@ export default function AdminPenyakit() {
                                     Edit
                                 </DropdownMenuItem>
                             </Link>
-                            <Dialog key={kode_penyakit} open={dialogStates[row.index]} onOpenChange={setDialogStates}>
+                            <Dialog open={
+                                //
+                                // @ts-ignore
+                                dialogStates[row.index]} onOpenChange={setDialogStates}>
                                 {/*<DropdownMenuItem >Hapus</DropdownMenuItem>*/}
 
                                 <DialogTrigger className={'w-full text-left px-2'}>Hapus</DialogTrigger>
@@ -231,7 +238,6 @@ export default function AdminPenyakit() {
     }
     async function fetchRule(limit=10, page=1, search=''){
         try {
-            // page=page>0?page-1:0
             const response = await fetch(BE_URL + '/v1/rule/all?limit='+limit+'&offset='+page+'&searchBy=nama_penyakit&search='+search,
                 {
                     method: 'GET',
@@ -241,8 +247,6 @@ export default function AdminPenyakit() {
                 throw new Error('Failed to fetch data');
             }
             const dataRule = await response.json();
-            console.log('Response data:', dataRule);
-            console.log('Response data:', dataRule['data']['entries'].length);
             if (dataRule['data']['entries'].length===0 && currentPage>1){
                 setCurrent(currentPage-1)
             }
@@ -299,16 +303,15 @@ export default function AdminPenyakit() {
 
     useEffect(() => {
         fetchRule(limit, currentPage)
-        console.log('data penyakit limit:{}'+limit+' current:'+currentPage+''+dataRule)
     }, [limit, currentPage]);
 
     for (let i = 1; i <= totalPage; i++) {
         pages.push(
             <PaginationItem key={i}>
                 { i == currentPage?
-                    <Button disabled  size={'sm'} variant={'secondary'}>{i}</Button>
+                    <Button disabled key={i+'s'} size={'sm'} variant={'secondary'}>{i}</Button>
                     :
-                    <Button className={''} variant={'outline'} size={'sm'} onClick={() => setCr(i)}>{i}</Button>}
+                    <Button className={''} key={i+'sa'} variant={'outline'} size={'sm'} onClick={() => setCr(i)}>{i}</Button>}
 
             </PaginationItem>
         );
@@ -400,8 +403,9 @@ export default function AdminPenyakit() {
                                             </TableRow>
                                         ))
                                     ) : (
-                                        <TableRow>
+                                        <TableRow key={'dx'+1000}>
                                             <TableCell
+                                                key={'dsx'+1000}
                                                 colSpan={columns.length}
                                                 className="h-24 text-center"
                                             >

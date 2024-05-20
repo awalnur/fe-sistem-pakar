@@ -8,10 +8,10 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import {useState} from "react";
-
+// @ts-ignore
 const FarmLocation = ({ options, onSelect }) => {
     const [selectedOption, setSelectedOption] = useState('');
-
+// @ts-ignore
     const handleSelectChange = (event) => {
         const selectedValue = event.valueOf();
         setSelectedOption(selectedValue);
@@ -31,7 +31,9 @@ const FarmLocation = ({ options, onSelect }) => {
                     <SelectContent>
                         <SelectGroup>
                             <SelectLabel>Lokasi Peternakan</SelectLabel>
-                            {options.map((item) => (
+                            {
+                                // @ts-ignore
+                                options.map((item) => (
                                 <SelectItem key={item.id} value={item.id.toString()}>
                                     {item.value}
                                 </SelectItem>

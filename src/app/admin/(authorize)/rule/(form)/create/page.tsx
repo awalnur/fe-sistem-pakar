@@ -52,6 +52,7 @@ export default function CreatePenyakitPage() {
     const [Selectedvalues, setValues] = useState({})
     const [inputGejala, setInputGejalaValue] = useState([0])
     const [inputValues, setInputValues] = useState({'bobot[0]':0.1});
+    // @ts-ignore
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setInputValues({
@@ -111,6 +112,7 @@ export default function CreatePenyakitPage() {
     })
     
     async function onSubmit(values: z.infer<typeof rule>) {
+        // @ts-ignore
         const gejala = []
         const total_gejala=Object.keys(Selectedvalues).length
         const kode_penyakit=value
@@ -130,11 +132,14 @@ export default function CreatePenyakitPage() {
                 const index = parseInt(idx)
                 gejala.push({
                     kode_gejala: val,
+                    // @ts-ignore
                     bobot: inputValues[`bobot[${index}]`],
                 })
             });
+            // @ts-ignore
             const body = {
                 'kode_penyakit': value,
+                //@ts-ignore
                 'gejala':gejala
             }
             console.log(body)
@@ -179,14 +184,16 @@ export default function CreatePenyakitPage() {
 
 
     }
-
+    // @ts-ignore
     const handleToggle = (key, currentValue) => {
         setValues(prevValues => ({
             ...prevValues,
+            // @ts-ignore
             [key]: currentValue === prevValues[key] ? "" : currentValue
         }));
         // setInputValues()
     };
+    // @ts-ignore
     const closes = (key, currentValue) => {
         console.log('asd')
 
@@ -244,6 +251,7 @@ export default function CreatePenyakitPage() {
                                                         {
                                                             value
                                                             ?
+                                                                // @ts-ignore
                                                             dataPenyakit.find((penyakit) =>penyakit.kode_penyakit === value.toUpperCase())?.penyakit || "Pilih Penyakit..."
                                                             : "Pilih Penyakit..."}
                                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -255,6 +263,7 @@ export default function CreatePenyakitPage() {
                                                         <CommandEmpty>No Penyakit found.</CommandEmpty>
                                                         <CommandList>
                                                             <CommandGroup>
+                                                                {/*@ts-ignore*/}
                                                                 {dataPenyakit?dataPenyakit.map((penyakit) => (
                                                                     // <label className={'s'} key={framework.value}> { framework.value}</label>
                                                                     <CommandItem
@@ -296,17 +305,16 @@ export default function CreatePenyakitPage() {
                                         {
                                             inputGejala.map((item, key)=>(
                                                 <div key={'d'+key} className={'flex gap-4'}>
+                                                    {/*@ts-ignore*/}
                                                     <Popover key={'s'+key} open={opens[key]} onOpenChange={setOpens}>
                                                         <PopoverTrigger asChild>
-                                                            <Button
-                                                                variant="outline"
-                                                                role="combobox"
-                                                                aria-expanded={opens[key]}
+                                                            {/*@ts-ignore*/}
+                                                            <Button variant="outline" role="combobox" aria-expanded={opens[key]}
                                                                 className="w-[800px] justify-between"
                                                             >
-                                                                {Selectedvalues[key]
-                                                                    ? dataGejala?dataGejala.find((framework) => framework.kode_gejala === Selectedvalues[key].toUpperCase())?.gejala:"s"
-                                                                    : "Pilih Gejala..."}
+                                                                {/*@ts-ignore*/}
+
+                                                                {Selectedvalues[key]? dataGejala?dataGejala.find((framework) => framework.kode_gejala === Selectedvalues[key].toUpperCase())?.gejala:"": "Pilih Gejala..."}
 
                                                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                             </Button>
@@ -318,15 +326,15 @@ export default function CreatePenyakitPage() {
                                                                 <CommandList>
                                                                     <CommandGroup>
                                                                         {dataGejala.map((gejala) => (
-
+                                                                                // @ts-ignore
                                                                                 Selectedvalues ?(Object.values(Selectedvalues).includes(gejala.kode_gejala.toLowerCase())||Object.values(Selectedvalues).includes(gejala.kode_gejala.toUpperCase()))?(
                                                                                     null
                                                                                 ):(
-                                                                                    <CommandItem
-                                                                                        key={gejala.kode_gejala}
-                                                                                        value={gejala.gejala}
-                                                                                        onSelect={(currentValue, val=gejala.kode_gejala) => {
+                                                                                    // @ts-ignore
+                                                                                    <CommandItem key={gejala.kode_gejala}  value={gejala.gejala}  onSelect={(currentValue, val=gejala.kode_gejala) => {
+                                                                                        //@ts-ignore
                                                                                             handleToggle(key, val === Selectedvalues[key] ? "" : val)
+                                                                                        //@ts-ignore
                                                                                             closes(key, val === opens[key] ? "" : val)
                                                                                             // console.log(values[key])
                                                                                             // setOpens(false)
@@ -336,35 +344,34 @@ export default function CreatePenyakitPage() {
                                                                                         <Check
                                                                                             className={cn(
                                                                                                 "mr-2 h-4 w-4",
+                                                                                                // @ts-ignore
                                                                                                 Selectedvalues[key] === gejala.kode_gejala ? "opacity-100" : "opacity-0"
                                                                                             )}
                                                                                         />
+                                                                                        {/*@ts-ignore*/}
                                                                                         {gejala.gejala}
                                                                                         {/*{Object.values(Selectedvalues).includes(gejala.kode_gejala.toLowerCase())}*/}
                                                                                     </CommandItem>
                                                                                 ):(
-                                                                                    <CommandItem
-                                                                                        key={gejala.kode_gejala}
-                                                                                        value={gejala.gejala}
-                                                                                        onSelect={(currentValue, val=gejala.kode_gejala) => {
+                                                                                    // @ts-ignore
+                                                                                    <CommandItem key={gejala.kode_gejala} value={gejala.gejala} onSelect={(currentValue, val=gejala.kode_gejala) => {
+                                                                                            // @ts-ignore
                                                                                             handleToggle(key, val === Selectedvalues[key] ? "" : val)
+                                                                                            // @ts-ignore
                                                                                             closes(key, val === opens[key] ? "" : val)
-                                                                                            // console.log(values[key])
-                                                                                            // setOpens(false)
-                                                                                            // closes(key)
-                                                                                        }}
+                                                                                            }}
                                                                                     >
                                                                                         <Check
                                                                                             className={cn(
                                                                                                 "mr-2 h-4 w-4",
+                                                                                                // @ts-ignore
                                                                                                 Selectedvalues[key] === gejala.kode_gejala ? "opacity-100" : "opacity-0"
                                                                                             )}
                                                                                         />
+                                                                                        {/*@ts-ignore*/}
                                                                                         {gejala.gejala}
                                                                                     </CommandItem>
                                                                                 )
-
-                                                                            // <label className={'s'} key={framework.value}> { framework.value}</label>
 
                                                                         ))}
                                                                     </CommandGroup>

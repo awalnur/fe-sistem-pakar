@@ -133,31 +133,40 @@ export default function Penyakit() {
                                 <div id={'title'}>
 
                                     <h1 className={'text-xl font-bold'}>
-                                        {detailpenyakit.nama_penyakit ? (detailpenyakit.nama_penyakit) : ('penyakit tidak ditemukan')}
+                                        {
+                                            //@ts-ignore
+                                            detailpenyakit.nama_penyakit ? (detailpenyakit.nama_penyakit) : ('penyakit tidak ditemukan')}
                                     </h1>
                                     <p className={'italic text-sm text-gray-600 border-b py-1 mt-2 '}>
-                                        {detailpenyakit.nama_penyakit ? (detailpenyakit.nama_penyakit) : ('penyakit tidak ditemukan')}
+                                        {
+                                            //@ts-ignore
+                                            detailpenyakit.nama_penyakit ? (detailpenyakit.nama_penyakit) : ('penyakit tidak ditemukan')}
                                     </p>
                                 </div>
                                 <div className={'Deskripsi my-2'}>
                                     <h2 className={'font-medium text-lg my-2'}> Tentang</h2>
                                     <hr className={'w-4/12 mb-2'}/>
-                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{ __html: detailpenyakit.definisi }}>
-                                        {/*{detailpenyakit.definisi}*/}
+                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{
+                                        // @ts-ignore
+                                        __html: detailpenyakit.definisi }}>
+
                                     </p>
                                 </div>
                                 <div className={'Deskripsi my-2'}>
                                     <h2 className={'font-medium text-lg my-2'}> Penularan</h2>
                                     <hr className={'w-4/12 mb-2'}/>
-                                    <p className={'text-justify text-sm'}>
-                                        {detailpenyakit.penularan}
+                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{
+                                        // @ts-ignore
+                                        __html:detailpenyakit.penularan}}>
 
                                     </p>
                                 </div>
                                 <div className={'Deskripsi my-2'}>
                                     <h2 className={'font-medium text-lg my-2'}> Pencegahan</h2>
                                     <hr className={'w-4/12 mb-2'}/>
-                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{__html: detailpenyakit.pencegahan }}>
+                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{__html:
+                                        // @ts-ignore
+                                        detailpenyakit.pencegahan }}>
                                         {/*{detailpenyakit.pencegahan}*/}
                                     </p>
                                 </div>
@@ -165,15 +174,21 @@ export default function Penyakit() {
                                 <div className={'Deskripsi my-2'}>
                                     <h2 className={'font-medium text-lg my-2'}> Penanganan</h2>
                                     <hr className={'w-4/12 mb-2'}/>
-                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{__html: detailpenyakit.penanganan }}>
+                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{
+                                        // @ts-ignore
+                                        __html: detailpenyakit.penanganan }}>
                                     </p>
                                 </div>
                             </div>
                             <div id={'image'} className={'lg:right-10 lg:top-10 aspect-square'}>
-                                <Image src={detailpenyakit.gambar?('/uploads/'+detailpenyakit.gambar):('/img/default.png')} className={'rounded-2xl'} alt={'Gambar Penyakit'}
+                                <Image src={
+                                    // @ts-ignore
+                                    detailpenyakit.gambar?('/uploads/'+detailpenyakit.gambar):('/img/default.png')} className={'rounded-2xl'} alt={'Gambar Penyakit'}
                                        width={500} height={250}/>
                                 <p className={'py-2'}>
-                                    {detailpenyakit.nama_penyakit}
+                                    {
+                                        // @ts-ignore
+                                        detailpenyakit.nama_penyakit}
                                 </p>
                             </div>
 

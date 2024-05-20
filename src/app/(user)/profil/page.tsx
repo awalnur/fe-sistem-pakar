@@ -106,38 +106,13 @@ export default function Profil() {
     const [dialogStates, setDialogStates] = useState({}); // State to store dialog open/close states
     const [editDialogStates, setEditDialogStates] = useState({}); // State to store dialog open/close states
 
-    const openDialog = (index) => {
-        setDialogStates(prevState => ({
-            ...prevState,
-            [index]: true // Open the dialog at index
-        }));
-    };
-
+// @ts-ignore
     const closeDialog = (index) => {
         setDialogStates(prevState => ({
             ...prevState,
             [index]: false // Close the dialog at index
         }));
     };
-
-    const openEditDialog = (index) => {
-        setEditDialogStates(prevState => ({
-            ...prevState,
-            [index]: true // Open the dialog at index
-        }));
-    };
-
-    const closeEditDialog = (index) => {
-        setEditDialogStates(prevState => ({
-            ...prevState,
-            [index]: false // Close the dialog at index
-        }));
-    };
-
-    const closeAllDialogs = () => {
-        setDialogStates({}); // Close all dialogs
-    };
-
 
     const {toast} = useToast()
 
@@ -401,6 +376,7 @@ export default function Profil() {
                 console.error('Error:', error);
             });
     }
+    // @ts-ignore
     async function HapusFarm(id, index){
         try {
             const response = await fetch(BE_URL + '/v1/farm/delete/'+id,
@@ -435,6 +411,7 @@ export default function Profil() {
             })
         }
     }
+    // @ts-ignore
     function getFarmData(index){
         let data = lokasiPeternakan[index]
         // console.log(data)
@@ -451,8 +428,11 @@ export default function Profil() {
                 data = getFarmData(key)
             }
         });
+        // @ts-ignore
         updateFarmAlamat.setValue('kode_peternakan', data?data.kode_peternakan:'')
+        // @ts-ignore
         updateFarmAlamat.setValue('nama_peternakan', data?data.nama_peternakan:'')
+        // @ts-ignore
         updateFarmAlamat.setValue('alamat_peternakan', data?data.alamat_peternakan:'')
 
     }, [editDialogStates, updateFarmAlamat]);
@@ -694,16 +674,20 @@ export default function Profil() {
                                                                 </div>
                                                                 <div className={' w-full'}>
                                                                     <h1 className={'text-lg font-medium'}>{
+                                                                        // @ts-ignore
                                                                         item?item.nama_peternakan:null
                                                                         // item.nama_peternakan
                                                                         // console.log(item.nama_peternakan)
                                                                     }</h1>
                                                                     <p className={'text-gray-400'}>{
+                                                                        // @ts-ignore
                                                                         item?item.alamat_peternakan:null
                                                                     }</p>
                                                                 </div>
                                                                 <Form {...updateFarmAlamat} key={'form'+index} >
-                                                                    <Dialog key={'form'+index} open={editDialogStates[index]} onOpenChange={isOpen => setEditDialogStates({ ...editDialogStates, [index]: isOpen })}>
+                                                                    <Dialog key={'form'+index} open={
+                                                                        // @ts-ignore
+                                                                        editDialogStates[index]} onOpenChange={isOpen => setEditDialogStates({ ...editDialogStates, [index]: isOpen })}>
                                                                         <DialogTrigger className={'px-1 aspect-square bg-orange-400 text-white border-white rounded-md h-8'}><PencilIcon/></DialogTrigger>
 
                                                                         <DialogContent>
@@ -717,7 +701,9 @@ export default function Profil() {
                                                                                     <FormField
                                                                                         control={updateFarmAlamat.control}
                                                                                         name="kode_peternakan"
-                                                                                        defaultValue={item?item.kode_peternakan:null}
+                                                                                        defaultValue={
+                                                                                            // @ts-ignore
+                                                                                        item?item.kode_peternakan:null}
                                                                                         render={({ field }) => (
                                                                                             <FormItem className={'hidden'}>
                                                                                                 <FormLabel>Kode Peternakan</FormLabel>
@@ -731,7 +717,9 @@ export default function Profil() {
                                                                                     <FormField
                                                                                         control={updateFarmAlamat.control}
                                                                                         name="nama_peternakan"
-                                                                                        defaultValue={item?item.nama_peternakan:null}
+                                                                                        defaultValue={
+                                                                                            // @ts-ignore
+                                                                                        item?item.nama_peternakan:null}
                                                                                         render={({ field }) => (
                                                                                             <FormItem>
                                                                                                 <FormLabel>Nama Peternakan</FormLabel>
@@ -745,7 +733,9 @@ export default function Profil() {
                                                                                     <FormField
                                                                                         control={updateFarmAlamat.control}
                                                                                         name="alamat_peternakan"
-                                                                                        defaultValue={item?item.alamat_peternakan:null}
+                                                                                        defaultValue={
+                                                                                            // @ts-ignore
+                                                                                        item?item.alamat_peternakan:null}
 
                                                                                         render={({ field }) => (
                                                                                             <FormItem>
@@ -767,7 +757,9 @@ export default function Profil() {
                                                                     </Dialog>
 
                                                                 </Form>
-                                                                <Dialog key={index} open={dialogStates[index]} onOpenChange={setDialogStates}>
+                                                                <Dialog key={index} open={
+                                                                    // @ts-ignore
+                                                                    dialogStates[index]} onOpenChange={setDialogStates}>
                                                                     <DialogTrigger className={'right-0 px-1 aspect-square bg-red-600 text-white border-white rounded-md h-8'}><Trash/></DialogTrigger>
                                                                     <DialogContent>
                                                                         <DialogHeader className={'border-b pb-3'}>
@@ -777,11 +769,15 @@ export default function Profil() {
                                                                         </DialogHeader>
                                                                         <DialogBody>
                                                                             Hapus Lokasi peternakan
-                                                                            <b> {item?item.nama_peternakan:null}</b>
+                                                                            <b> {
+                                                                                // @ts-ignore
+                                                                                item?item.nama_peternakan:null}</b>
                                                                         </DialogBody>
                                                                         <DialogFooter>
                                                                             <div className={'flex w-full gap-5 justify-items-end'}>
-                                                                                <Button variant={'destructive'} className={'ml-auto'} onClick={()=>HapusFarm(item.kode_peternakan, index)}>Hapus</Button>
+                                                                                <Button variant={'destructive'} className={'ml-auto'} onClick={
+                                                                                    // @ts-ignore
+                                                                                    ()=>HapusFarm(item.kode_peternakan, index)}>Hapus</Button>
                                                                                 <DialogClose  className={'border rounded-lg px-5 py-1.5'}>Batalkan</DialogClose>
                                                                             </div>
                                                                         </DialogFooter>

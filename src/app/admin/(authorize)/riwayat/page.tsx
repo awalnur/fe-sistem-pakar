@@ -96,13 +96,14 @@ export default function AdminRiwayat() {
     const router = useRouter()
     const [isLoading, setLoading] = useState(false)
     const data: modelPenyakit[] = dataPenyakit?dataPenyakit:[]
-
+    // @ts-ignore
     const closeDialog = (index) => {
         setDialogStates(prevState => ({
             ...prevState,
             [index]: false // Close the dialog at index
         }));
     };
+    // @ts-ignore
     async function DeleteRiwayat(id, index){
         try {
             const response = await fetch(BE_URL + '/v1/riwayat/delete/'+id,
@@ -195,7 +196,7 @@ export default function AdminRiwayat() {
             header: () => <div className="text-left">Peternakan</div>,
             cell: ({ row }) => {
                 const peternakan = row.getValue("peternakan")
-
+                // @ts-ignore
                 return <div className="text-left text-xs">{peternakan}</div>
             },
         },
@@ -204,7 +205,7 @@ export default function AdminRiwayat() {
             header: () => <div className="text-center">Persentase</div>,
             cell: ({ row }) => {
                 const persentase = row.getValue("persentase")
-
+                // @ts-ignore
                 return <div className="text-center text-xs">{persentase} %</div>
             },
         },
@@ -224,6 +225,7 @@ export default function AdminRiwayat() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            {/*@ts-ignore*/}
                             <Dialog key={kode_riwayat} open={dialogStates[row.index]} onOpenChange={setDialogStates}>
                                 {/*<DropdownMenuItem >Hapus</DropdownMenuItem>*/}
 

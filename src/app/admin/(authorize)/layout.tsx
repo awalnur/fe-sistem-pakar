@@ -130,7 +130,9 @@ export default function RootLayout({
 
     return (
         <div className={'flex  bg-gray-200 bg-cover bg-fixed'}>
-            <Nav links={link} isCollapsed={false} current_user={current_user?current_user.username:'-'}/>
+            <Nav links={link} isCollapsed={false} current_user={
+                // @ts-ignore
+                current_user?current_user.username:'-'}/>
             <main className="flex flex-row bg-gray-200 w-full">
                 <Toaster/>
                 <div
@@ -147,7 +149,9 @@ export default function RootLayout({
                                 <div className={'avatar w-12 rounded-full aspect-square bg-gray-700'}>
                                 </div>
                                 <div>
-                                    <h1 className={'font-medium text-left'}>{current_user? current_user.username:'-'}</h1>
+                                    <h1 className={'font-medium text-left'}>{
+                                        // @ts-ignore
+                                        current_user? current_user.username:'-'}</h1>
                                     <h2 className={'text-xs font-light text-left'}>Administrator</h2>
                                 </div>
                             </DropdownMenuTrigger>
@@ -181,7 +185,9 @@ export default function RootLayout({
 
                                         index != 0?(
                                         <BreadcrumbItem key={index} >
-                                            <BreadcrumbLink href={"/"+(index==1?path[index]:(index==2?(path[1]+'/'+path[index]):(index==3?(path[1]+'/'+path[2]+'/'+path[index]):(''))))} className={'capitalize flex flex-row'}> <ChevronRight className={'h-4 my-auto'}/>{item}</BreadcrumbLink>
+                                            <BreadcrumbLink href={
+                                                // @ts-ignore
+                                                "/"+(index==1?path[index]:(index==2?(path[1]+'/'+path[index]):(index==3?(path[1]+'/'+path[2]+'/'+path[index]):(''))))} className={'capitalize flex flex-row'}> <ChevronRight className={'h-4 my-auto'}/>{item}</BreadcrumbLink>
                                         </BreadcrumbItem>
                                         ):('')
 

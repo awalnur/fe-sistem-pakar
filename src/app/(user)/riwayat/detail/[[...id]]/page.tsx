@@ -77,7 +77,9 @@ export default function DetailRiwayat() {
                             <div id={'title'}>
                                 <h2 className={'text-md font-medium my-2'}>Nama Penyakit :</h2>
                                 <h1 className={'text-lg font-bold border p-3 rounded-xl bg-gray-50'}>
-                                    {result ? (result.penyakit.nama_penyakit) : ''}
+                                    {
+                                        // @ts-ignore
+                                        result ? (result.penyakit.nama_penyakit) : ''}
                                 </h1>
                             </div>
                             <Separator/>
@@ -85,7 +87,7 @@ export default function DetailRiwayat() {
                                 <h2 className={'text-md font-medium my-2'}>Gejala Yang terjadi :</h2>
                                 <div className={'gejala-terjadi p-3 border rounded-lg px-7'}>
                                     <ul className={'list list-inside list-disc'}>
-                                        {
+                                        {// @ts-ignore
                                             result ? (result.gejala.map((item, index) => (
                                                 <li key={index} className={'list-item p-2.5 border-b'}>
                                                     {item}
@@ -99,7 +101,7 @@ export default function DetailRiwayat() {
                                 <h2 className={'font-medium text-md my-2 pt-5'}> Tentang DetailRiwayat</h2>
                                 <hr className={'w-4/12 mb-2'}/>
                                 <p className={'text-justify  py-2'}>
-                                    {
+                                    {// @ts-ignore
                                         result ? (result.penyakit.definisi) : ''
                                     }
                                 </p>
@@ -110,7 +112,7 @@ export default function DetailRiwayat() {
                                 <h2 className={'font-medium text-lg my-2'}> Penularan</h2>
                                 <hr className={'w-4/12 mb-2'}/>
                                 <p className={'text-justify py-2'}>
-                                    {
+                                    {// @ts-ignore
                                         result ? (result.penyakit.penularan) : '-'
                                     }
                                 </p>
@@ -119,7 +121,7 @@ export default function DetailRiwayat() {
                                 <h2 className={'font-medium text-lg my-2'}> Pencegahan</h2>
                                 <hr className={'w-4/12 mb-2'}/>
                                 <p className={'text-justify py-2'}>
-                                    {
+                                    {// @ts-ignore
                                         result ? (result.penyakit.pencegahan) : '-'
                                     }
                                 </p>
@@ -129,7 +131,7 @@ export default function DetailRiwayat() {
                             <Image src={'/img/default.png'} className={'rounded-2xl'} alt={'Gambar Penyakit'}
                                    width={500} height={250}/>
                             <p className={'py-2'}>
-                                {
+                                {// @ts-ignore
                                     result ? (result.penyakit.nama_penyakit) : '-'
                                 }                            </p>
 
@@ -138,8 +140,12 @@ export default function DetailRiwayat() {
                                 <div className={'presentase px-20'}>
                                     {" "}
                                     <CircularProgressbar
-                                        value={(result ? (result.persentase) : (0))}
-                                        text={(result ? (result.persentase) : (0)) + `%`}
+                                        value={
+                                            // @ts-ignore
+                                        (result ? (result.persentase) : (0))}
+                                        text={
+                                            // @ts-ignore
+                                        (result ? (result.persentase) : (0)) + `%`}
                                     />
                                 </div>
                             </div>

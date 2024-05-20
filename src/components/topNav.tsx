@@ -1,11 +1,12 @@
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import Image from "next/image";
 
 export const TopNav = () => {
     return <div>
     <nav className="fixed backdrop-blur border-b-[#f0f0f050] border-b top-0 z-50 flex w-full bg-transparent lg:px-16 lg:py-3 xl:px-64">
         <div className="nav-logo">
-    <img className="h-12" src="/img/logo-nav.png"/>
+    <Image alt={'logoo'} className="h-12" src="/img/logo-nav.png"/>
         </div>
         <div className="text-black ml-16 my-auto flex flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">
     <Link href="/" legacyBehavior passHref>
@@ -20,7 +21,9 @@ export const TopNav = () => {
     </div>
 
     <div className="ml-auto">
-    { login=='true'? (
+    {
+        // @ts-ignore
+        login=='true'? (
         <div className="flex flex-row gap-2 z-10">
         <Link href={'/logout'}>
         <Button className={'rounded-full xl:px-10 xl:text-lg xl:py-6'} variant={'outline'}

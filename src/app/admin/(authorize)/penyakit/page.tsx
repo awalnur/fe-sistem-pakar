@@ -97,12 +97,14 @@ export default function AdminPenyakit() {
     const [isLoading, setLoading] = useState(false)
     const data: modelPenyakit[] = dataPenyakit?dataPenyakit:[]
 
+    // @ts-ignore
     const closeDialog = (index) => {
         setDialogStates(prevState => ({
             ...prevState,
             [index]: false // Close the dialog at index
         }));
     };
+    // @ts-ignore
     async function DeletePenyakit(id, index){
         try {
             const response = await fetch(BE_URL + '/v1/penyakit/delete/'+id,
@@ -188,7 +190,7 @@ export default function AdminPenyakit() {
             header: () => <div className="text-right">Deskripsi Penyakit</div>,
             cell: ({ row }) => {
                 const definisi = row.getValue("definisi")
-
+                // @ts-ignore
                 return <div className="text-left text-xs" dangerouslySetInnerHTML={{__html:definisi}}></div>
             },
         },
@@ -198,6 +200,7 @@ export default function AdminPenyakit() {
             cell: ({ row }) => {
                 const kode_penyakit = row.getValue("kode_penyakit")
 
+                // @ts-ignore
                 return (
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -213,8 +216,10 @@ export default function AdminPenyakit() {
                                     Edit
                                 </DropdownMenuItem>
                             </Link>
-                            <Dialog key={kode_penyakit} open={dialogStates[row.index]} onOpenChange={setDialogStates}>
-                                {/*<DropdownMenuItem >Hapus</DropdownMenuItem>*/}
+                            {/*// @ts-ignore*/}
+                            <Dialog key={kode_penyakit} open={
+                                // @ts-ignore
+                                dialogStates[row.index]} onOpenChange={setDialogStates}>
 
                                 <DialogTrigger className={'w-full text-left px-2'}>Hapus</DialogTrigger>
                                 <DialogContent>

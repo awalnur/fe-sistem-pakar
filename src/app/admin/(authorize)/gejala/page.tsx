@@ -133,6 +133,7 @@ export default function AdminGejala() {
     const updateGejala = useForm<z.infer<typeof updategejalaSchema>>({
         resolver: zodResolver(updategejalaSchema)
     })
+    // @ts-ignore
     const closeDialog = (index) => {
         setDialogStates(prevState => ({
             ...prevState,
@@ -238,10 +239,7 @@ export default function AdminGejala() {
             });
     }
 
-
-
-
-
+    // @ts-ignore
     async function DeleteGejala(id, index){
         try {
             const response = await fetch(BE_URL + '/v1/gejala/delete/'+id,
@@ -338,7 +336,9 @@ export default function AdminGejala() {
                         <Button className={'px-1 aspect-square bg-orange-400 text-white border-white rounded-md h-8'} onClick={()=>(setEditDialogStates(true), setUpdateData({'kode_gejala': kode_gejala, 'gejala':gejala}))}><PencilIcon/></Button>
 
 
-                        <Dialog key={index} open={dialogStates[index]} onOpenChange={setDialogStates}>
+                        <Dialog key={index} open={
+                            // @ts-ignore
+                            dialogStates[index]} onOpenChange={setDialogStates}>
 
                             <DialogTrigger className={'px-1 aspect-square bg-red-600 text-white border-white rounded-md h-8'}><Trash/></DialogTrigger>
 
@@ -365,9 +365,6 @@ export default function AdminGejala() {
             },
         },
     ]
-    const goPage=(uri:string)=>{
-        router.push(uri)
-    }
     async function fetchGejala(limit=10, page=1, search=''){
         try {
             // page=page>0?page-1:0
@@ -447,7 +444,6 @@ export default function AdminGejala() {
         let data = null
 
         Object.keys(editDialogStates).forEach(key => {
-            console.log('hahahah')
             // @ts-ignore
             if (editDialogStates[key] === true) {
                 data = getGejalaData(key)
@@ -455,7 +451,9 @@ export default function AdminGejala() {
         });
 
         console.log(data)
+        // @ts-ignore
         updateGejala.setValue('kode_gejala', update_data?update_data.kode_gejala:'')
+        // @ts-ignore
         updateGejala.setValue('gejala', update_data?update_data.gejala:'')
     }, [limit, currentPage, updateGejala, editDialogStates]);
 

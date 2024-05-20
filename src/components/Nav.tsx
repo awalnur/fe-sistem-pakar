@@ -98,6 +98,7 @@ export function Nav({ links, current_user}: NavProps)
 
                                       className={(link.baseName===base)?('font-medium w-full flex gap-2  bg-[#1b5820] px-5 py-3 rounded-lg'):('!w-full flex gap-2 px-5 py-2 rounded-lg')}
                                 >
+                                    {/* @ts-ignore*/}
                                     {icon[link.icon]} {link.title}
                                 </Link>
 

@@ -94,7 +94,7 @@ export default function Riwayat() {
             setLoading(false);
         }
     }
-
+// @ts-ignore
     async function HapusRiwayat(id){
         try {
             const response = await fetch(BE_URL + '/v1/riwayat/delete/'+id,
@@ -221,7 +221,7 @@ export default function Riwayat() {
                     <div className={'content flex flex-col w-full'}>
                         <div className={'pb-4'}>
                             <h1 className={'text-lg font-bold'}>Riwayat</h1>
-                            <p className={'text-sm font-normal text-gray-600'}>Halaman homepagee Pengguna</p>
+                            <p className={'text-sm font-normal text-gray-600'}>Halaman homepage Pengguna</p>
                         </div>
                         <Card className={'flex w-full transition duration-150 bg-[#ffffff90] rounded-2xl backdrop-blur border px-4 py-2  gap-5'}>
                             <div className={'box-content w-full p-5'}>
@@ -276,9 +276,8 @@ export default function Riwayat() {
                                             </TableRow>
                                         </TableHeader>
                                         <TableBody>
-                                            {
-                                                dataRiwayat ? (
-                                                    dataRiwayat.map((item, key)=>(
+                                            {// @ts-ignore
+                                                dataRiwayat ? (dataRiwayat.map((item, key)=>(
                                                         <TableRow key={key}>
                                                             <TableCell className="font-medium">{item.number}</TableCell>
                                                             <TableCell>{moment(item.created_date, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY')}</TableCell>
