@@ -1,0 +1,188 @@
+"use client"
+import Image from "next/image";
+import React, {useEffect, useState} from "react";
+import {Card} from "@/components/ui/card";
+
+import {map, z} from "zod"
+
+import {Nav} from "@/app/(all)/penyakit/detail/[[...id]]/nav";
+import { Separator } from "@radix-ui/react-separator";
+import {usePathname} from "next/navigation";
+import {useRouter} from "next/router";
+import {Skeleton} from "@/components/ui/skeleton";
+const formSchema = z.object({
+    searhcinput: z.string().min(2, {
+        message: "Username must be at least 2 characters.",
+    }),
+})
+
+
+const BE_URL = process.env.NEXT_PUBLIC_BE_URL
+
+export default function Penyakit() {
+    const router = usePathname().split('/')
+
+    const [isCollapsed, setIsCollapsed] = React.useState(false)
+    const id  = router[router.length-1]
+    const [penyakit, setData] = useState(null);
+    const [detailpenyakit, setDataDetail] = useState(null);
+    const [isLoading, setLoading] = useState(true);
+    const [isLoadingData, setDataLoading] = useState(true);
+    console.log(id)
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(BE_URL + '/v1/penyakit/option');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const dataPenyakit = await response.json();
+                console.log('Response data:', dataPenyakit);
+                setData(dataPenyakit['data']['entries']);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                // Handle error case
+                setLoading(false);
+            }
+        };
+
+        const fetchDataPenyakit = async () => {
+            try {
+                const response = await fetch(BE_URL + '/v1/penyakit/get/'+id);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const dataPenyakit = await response.json();
+                setDataDetail(dataPenyakit['data']);
+                setDataLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                // Handle error case
+                setDataLoading(false);
+            }
+        };
+        fetchData();
+        fetchDataPenyakit();
+    }, []);
+
+    return (
+        <main className="block">
+            <div className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24  ">
+
+                <div className={"absolute -z-40 xl:w-6/12 right-0 bg-hero-pattern h-screen bg-cover "}>
+                </div>
+
+                <div className={'relative w-full top-20 xl:px-64 xl:py-16 flex xl:gap-5'}>
+                    <div className={'sticky z-50 top-24 h-fit w-3/12 rounded-xl border'}>
+                        <div
+                            data-collapsed={isCollapsed}
+                            className="sticky group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2"
+                        >
+                            <h1 className={'px-4 pt-2'}>List Penyakit</h1>
+                            <Separator className={'border'}/>
+
+                            <Nav
+                                diseaseId={id}
+                                isCollapsed={isCollapsed}
+                                links={penyakit?penyakit : [{id:'1',value:'None'}]}
+                            />
+                        </div>
+                    </div>
+                    {isLoadingData ? (
+                        <Card className={'flex w-full bg-[#ffffff90] rounded-xl backdrop-blur border p-8  gap-5'}>
+                            <div className={'box-content w-full p-5'}>
+                                <div id={'title'}>
+                                    <Skeleton className={'text-xl w-80 h-5 my-2'} />
+
+                                    <Skeleton className={'text-xl w-40 h-3 my-1'}/>
+                                </div>
+                                <div className={'Deskripsi my-2'}>
+
+                                    <Skeleton className={'text-xl w-60 h-4 my-4'}/>
+                                    <hr className={'w-4/12 mb-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                </div>
+                                <div className={'Deskripsi my-2'}>
+
+                                    <Skeleton className={'text-xl w-60 h-4 my-4'}/>
+                                    <hr className={'w-4/12 mb-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                    <Skeleton className={'text-xl w-full h-3 my-2'}/>
+                                </div>
+
+                            </div>
+                            <div id={'image'} className={'lg:right-10 lg:top-10 aspect-square w-60'}>
+                                <Skeleton className={'rounded-2xl w-60 aspect-square'}
+                                />
+                                <Skeleton className={'py-2 w-60 w-48 my-3'}>
+                                </Skeleton>
+                            </div>
+                        </Card>
+                    ) : (
+                        <Card className={'flex w-full bg-[#ffffff90] rounded-xl backdrop-blur border p-8  gap-5'}>
+
+                            <div className={'box-content w-full p-5'}>
+                                <div id={'title'}>
+
+                                    <h1 className={'text-xl font-bold'}>
+                                        {detailpenyakit.nama_penyakit ? (detailpenyakit.nama_penyakit) : ('penyakit tidak ditemukan')}
+                                    </h1>
+                                    <p className={'italic text-sm text-gray-600 border-b py-1 mt-2 '}>
+                                        {detailpenyakit.nama_penyakit ? (detailpenyakit.nama_penyakit) : ('penyakit tidak ditemukan')}
+                                    </p>
+                                </div>
+                                <div className={'Deskripsi my-2'}>
+                                    <h2 className={'font-medium text-lg my-2'}> Tentang</h2>
+                                    <hr className={'w-4/12 mb-2'}/>
+                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{ __html: detailpenyakit.definisi }}>
+                                        {/*{detailpenyakit.definisi}*/}
+                                    </p>
+                                </div>
+                                <div className={'Deskripsi my-2'}>
+                                    <h2 className={'font-medium text-lg my-2'}> Penularan</h2>
+                                    <hr className={'w-4/12 mb-2'}/>
+                                    <p className={'text-justify text-sm'}>
+                                        {detailpenyakit.penularan}
+
+                                    </p>
+                                </div>
+                                <div className={'Deskripsi my-2'}>
+                                    <h2 className={'font-medium text-lg my-2'}> Pencegahan</h2>
+                                    <hr className={'w-4/12 mb-2'}/>
+                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{__html: detailpenyakit.pencegahan }}>
+                                        {/*{detailpenyakit.pencegahan}*/}
+                                    </p>
+                                </div>
+
+                                <div className={'Deskripsi my-2'}>
+                                    <h2 className={'font-medium text-lg my-2'}> Penanganan</h2>
+                                    <hr className={'w-4/12 mb-2'}/>
+                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{__html: detailpenyakit.penanganan }}>
+                                    </p>
+                                </div>
+                            </div>
+                            <div id={'image'} className={'lg:right-10 lg:top-10 aspect-square'}>
+                                <Image src={detailpenyakit.gambar?('/uploads/'+detailpenyakit.gambar):('/img/default.png')} className={'rounded-2xl'} alt={'Gambar Penyakit'}
+                                       width={500} height={250}/>
+                                <p className={'py-2'}>
+                                    {detailpenyakit.nama_penyakit}
+                                </p>
+                            </div>
+
+                    </Card>
+                        )
+                    }
+                </div>
+
+            </div>
+        </main>
+    );
+}
