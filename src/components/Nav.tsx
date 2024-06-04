@@ -11,9 +11,10 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import {usePathname, useRouter} from "next/navigation";
+import {redirect, usePathname, useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
-
+// import {useRouter} from "next/router";
+// import {use} from "next/navigation";
 interface NavProps {
     isCollapsed: boolean
     current_user: string
@@ -28,8 +29,10 @@ interface NavProps {
 
 export function Nav({ links, current_user}: NavProps)
 {
+    const router = useRouter()
     const base = usePathname().split('/')[2]
     // console.log(base)
+
     const icon={
         'ChevronDown':<ChevronDown/>,
         'History':<History/>,
@@ -41,8 +44,14 @@ export function Nav({ links, current_user}: NavProps)
         'Users':<Users/>
     }
     function HandleLogouts()  {
+
+        if (typeof window === "undefined") return null;
+        localStorage.removeItem('adminLogin')
+        localStorage.removeItem('accessToken')
+
+
         console.log('hapus')
-        // router.push("/login");
+        router.replace('/admin/login')
         // return true
 
     }
@@ -73,14 +82,15 @@ export function Nav({ links, current_user}: NavProps)
                                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                     <DropdownMenuSeparator/>
                                     <DropdownMenuGroup>
-
+                                        <Link href={'/admin/profil'}>
                                         <DropdownMenuItem>
                                             <User className="mr-2 h-4 w-4"/>
                                             <span>Profile</span>
                                             {/*<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>*/}
                                         </DropdownMenuItem>
+                                        </Link>
                                     </DropdownMenuGroup>
-                                    <DropdownMenuItem >
+                                    <DropdownMenuItem  onClick={()=>HandleLogouts()}>
                                         <LogOut className="mr-2 h-4 w-4" />
                                         <span>Log out</span>
                                     </DropdownMenuItem>

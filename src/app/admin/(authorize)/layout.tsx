@@ -24,6 +24,7 @@ import {
 import {redirect, usePathname, useRouter} from "next/navigation";
 import type { Metadata } from "next";
 import {Header} from "@/lib/header";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -95,7 +96,6 @@ export default function RootLayout({
     const router = useRouter()
     const path = usePathname().split('/')
 
-    console.log(path)
     async function fetchUser(limit=10, page=1, search=''){
         try {
             // page=page>0?page-1:0
@@ -128,6 +128,20 @@ export default function RootLayout({
         fetchUser()
     }, []);
 
+    function HandleLogouts()  {
+
+        if (typeof window === "undefined") return null;
+        localStorage.removeItem('adminLogin')
+        localStorage.removeItem('accessToken')
+
+
+        console.log('hapus')
+        router.replace('/admin/login')
+        // return true
+
+    }
+
+
     return (
         <div className={'flex  bg-gray-200 bg-cover bg-fixed'}>
             <Nav links={link} isCollapsed={false} current_user={
@@ -159,13 +173,16 @@ export default function RootLayout({
                                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator/>
                                 <DropdownMenuGroup>
-
-                                    <DropdownMenuItem>
+                                    <Link href={'/admin/profil'}>
+                                                                            <DropdownMenuItem>
                                         <User className="mr-2 h-4 w-4"/>
                                         <span>Profile</span>
                                     </DropdownMenuItem>
+
+                                    </Link>
+
                                 </DropdownMenuGroup>
-                                <DropdownMenuItem>
+                                <DropdownMenuItem onClick={()=>HandleLogouts()}>
                                     <LogOut className="mr-2 h-4 w-4"/>
                                     <span>Log out</span>
                                 </DropdownMenuItem>

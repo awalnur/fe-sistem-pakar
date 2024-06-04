@@ -211,6 +211,43 @@ export default function CreatePenyakitPage() {
             [`bobot[${inputGejala.length}]`]: 0.1
         });
     };
+    // @ts-ignore
+    const removeGejala = (index) => {
+        // Filter out the element at the specified index from inputGejala
+        const newInputGejala = inputGejala.filter((_, i) => i !== index);
+
+        // Create a new object for inputValues excluding the key for the removed index
+        const newInputValues = {};
+        Object.keys(inputValues).forEach((key) => {
+            const match = key.match(/bobot\[(\d+)\]/);
+            if (match) {
+                const keyIndex = parseInt(match[1], 10);
+                if (keyIndex !== index) {
+                    const newKeyIndex = keyIndex > index ? keyIndex - 1 : keyIndex;
+                    // @ts-ignore
+                    newInputValues[`bobot[${newKeyIndex}]`] = inputValues[key];
+                }
+            }
+        });
+
+        // Create a new object for Selectedvalues excluding the key for the removed index
+        const newSelectedValues = {};
+        Object.keys(Selectedvalues).forEach((key) => {
+            const keyIndex = parseInt(key, 10);
+            if (keyIndex !== index) {
+                const newKeyIndex = keyIndex > index ? keyIndex - 1 : keyIndex;
+                // @ts-ignore
+                newSelectedValues[newKeyIndex] = Selectedvalues[key];
+            }
+        });
+
+        // Update the state
+        setInputGejalaValue(newInputGejala);
+        // @ts-ignore
+        setInputValues(newInputValues);
+        setValues(newSelectedValues);
+    };
+
 
     useEffect(() => {
         if (dataPenyakit===null){
@@ -220,8 +257,9 @@ export default function CreatePenyakitPage() {
             fetchGejala()
         }
     }, [dataPenyakit, dataGejala]);
-    console.log(Selectedvalues, inputValues, inputGejala)
+    // console.log(Selectedvalues, inputValues, inputGejala)
     // console.log(value, value?(dataPenyakit?dataPenyakit.find((dataPenyakit)=>value.toUpperCase()==dataPenyakit.kode_penyakit)?.penyakit:"s"):"k", dataPenyakit[0]);
+    // @ts-ignore
     return (
         <div className={'py-10'}>
 
@@ -379,7 +417,9 @@ export default function CreatePenyakitPage() {
                                                             </Command>
                                                         </PopoverContent>
                                                     </Popover>
-                                                    <Input name={'bobot['+key+']'} key={'a'+key} type={'number'} className={'w-40'} placeholder={'Belief'} min={0.1} defaultValue={0.1} step={0.1} max={1.0} onChange={handleInputChange}/>
+                                                    {/*@ts-ignore*/}
+                                                    <Input name={'bobot['+key+']'} key={'a'+key} type={'number'} className={'w-40'} placeholder={'Belief'} min={0.1} defaultValue={0.1} value={inputValues['bobot['+key+']']} step={0.1} max={1.0} onChange={handleInputChange}/>
+                                                    <Button variant={'destructive'} onClick={()=>(removeGejala(key))} type={'button'}>-</Button>
                                                 </div>
                                             ))
                                         }

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import "../globals.css";
 import { useEffect, useState } from "react";
 import { cekLogin } from "@/lib/cekLogin";
-import {History, Loader2} from "lucide-react";
+import {History, ListCollapse, Loader2} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {className} from "postcss-selector-parser";
 
@@ -22,13 +22,17 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
+import {usePrev} from "@react-spring/shared";
 
 
 // @ts-ignore
 export default function RootLayout({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
+  const [isShowAside, setIsShowAside] = useState(false);
+
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const login = cekLogin()
     if (login===null || login==='false'){
@@ -49,14 +53,30 @@ export default function RootLayout({ children }) {
     router.push("/login");
   };
 
+  // @ts-ignore
   return (
       <html lang="en">
       <body className="font-inter">
-      <nav className="fixed backdrop-blur border-b-[#f0f0f050] border-b top-0 z-50 flex w-full bg-transparent lg:px-16 lg:py-3 xl:px-64">
-        <div className="nav-logo">
-          <Image alt={'logo Image'}  className={"h-12"} src="/img/logo-nav.png" width={100} height={100}/>
+      {isShowAside?(
+      <div className={'fixed h-full w-full z-40 bg-[#00000080] backdrop-blur'} >
+        <aside className={"fixed inset-0 h-full top-0 p-10 pt-20 flex flex-col gap-5 z-50 left-0 w-5/6 bg-white"}>
+
+          <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/">Homepage</Link>
+          <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/penyakit">Penyakit</Link>
+          <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/tentang">Tentang</Link>
+        </aside>
+
+      </div>
+          ):''}
+      <nav className="fixed backdrop-blur border-b-[#f0f0f050] border-b top-0 z-50 flex w-full bg-transparent px-5 py-3 lg:px-16 lg:py-3 xl:px-64">
+        <div className="flex flex-wrap md:hidden items-center justify-center w-fit">
+          <Button className={'text-black'} variant={'ghost'} onClick={()=>setIsShowAside(prevState => !prevState)}><ListCollapse/></Button>
         </div>
-        <div className="text-black ml-16 my-auto flex flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">
+        <div className="nav-logo mx-auto md:mx-0 center">
+          <Image alt={'logo Image'}  className={"md:h-12 "} src="/img/logo-nav.png" width={100} height={100}/>
+        </div>
+        <div className="md:flex text-black hidden ml-16 my-auto flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">
+        {/*<div className="fixed h-full bg-white md:flex text-black ml-16 my-auto flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">*/}
           <Link href="/">Homepage</Link>
           <Link href="/penyakit">Penyakit</Link>
           <Link href="/tentang">Tentang</Link>

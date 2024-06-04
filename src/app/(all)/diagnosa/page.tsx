@@ -274,15 +274,15 @@ return (
                 <div className={"fixed -z-40 lg:w-8/12 xl:w-6/12 right-0 bg-hero-pattern h-screen bg-cover top-0"}>
                 </div>
                 <div
-                    className="relative flex flex-col w-full lg:gap-5 xl:top-28 lg:top-20 py-4 z-20 left-0 justify-between font-mono text-sm lg:flex mb-15 h-auto">
+                    className="relative flex flex-col w-full lg:gap-5 top-20 px-2 xl:top-28 lg:top-20 py-4 z-20 left-0 justify-between font-mono text-sm lg:flex mb-15 h-auto">
                     <div className={'text-black'}>
-                        <h1 className={'title text-xl font-bold md:text-center'}>
+                        <h1 className={'title text-xl font-bold text-center'}>
                             DIAGNOSA PENYAKIT AYAM </h1>
                         <p className={'descriptif text-center text-gray-600 mx-auto mt-2'}>
                             Cari tahu jenis penyakit pada ayam anda dengan melakukan diagnosa dengan memilih data gejala yang terjadi pada Ayam anda
                         </p>
                     </div>
-                    <Card className={'xl:max-w-5xl mx-auto w-full px-14 ty-8 mt-16 rounded-xl bg-[#ffffff90] backdrop-blur  mb-16'}>
+                    <Card className={'xl:max-w-5xl mx-auto w-full md:px-14 px-4 my-8 md:mt-16 rounded-xl bg-[#ffffff90] backdrop-blur  mb-16'}>
                         <Form {...addAlamat} >
                             <Dialog open={open} onOpenChange={setOpen}>
 
@@ -357,7 +357,7 @@ return (
                                     </h1>
                                 </div>
                                 <Separator/>
-                                <div className={'list-gejala py-6 gap-5'}>
+                                <div className={'list-gejala py-2 md:py-6 gap-5'}>
                                     {isLoading ? (
                                         <p>Loading...</p>
                                     ) : (

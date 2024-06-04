@@ -268,7 +268,7 @@ export default function AdminRiwayat() {
     async function fetchRiwayat(limit=10, page=1, search=''){
         try {
             // page=page>0?page-1:0
-            const response = await fetch(BE_URL + '/v1/riwayat/all?limit='+limit+'&page='+page+'&searchBy=username&search='+search,
+            const response = await fetch(BE_URL + '/v1/riwayat/all?limit='+limit+'&page='+page+'&searchBy=nama_penyakit&search='+search,
                 {
                     method: 'GET',
                     headers: Header()

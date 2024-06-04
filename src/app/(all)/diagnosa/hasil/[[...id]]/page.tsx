@@ -15,9 +15,10 @@ export default function ResultDiagnose() {
     const [result, setData] = useState(null);
     const [isLoading, setLoading] = useState(true);
 
-    const router = usePathname()
+    const router = usePathname().split('/')
     const login = cekLogin()
-    const id_riwayat = router[router.length-1].split('/')
+    const id_riwayat = router[router.length-1]
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -36,7 +37,6 @@ export default function ResultDiagnose() {
                     throw new Error('Failed to fetch data');
                 }
                 const result = await response.json();
-                console.log('Response data:', result);
                 setData(result['data']);
                 setLoading(false);
             } catch (error) {
@@ -56,16 +56,16 @@ export default function ResultDiagnose() {
         <main className="block">
             <div className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24 md:px-16 px-4 ">
 
-                <div className={"absolute -z-40 xl:w-6/12 lg:w-8/12 right-0 bg-hero-pattern h-screen bg-cover "}>
+                <div className={"fixed w-full -z-40 xl:w-6/12 lg:w-8/12 right-0 bg-hero-pattern h-screen bg-cover "}>
                 </div>
 
-                <div className={'relative w-full top-20 xl:px-64 xl:py-16 xl:gap-5'}>
-                    <div className={'title w-full lg:p-8'}>
+                <div className={'relative w-full top-20 xl:px-64 xl:py-16 xl:gap-5 py-5'}>
+                    <div className={'title w-full lg:p-8 p-4'}>
                         <h1 className={'text-center font-bold text-xl'}>Hasil Diagnosa</h1>
                     </div>
-                    <Card className={'flex w-full bg-[#ffffff90] rounded-xl backdrop-blur border p-8  gap-5'}>
+                    <Card className={'flex flex-col md:flex-row w-full bg-[#ffffff90] rounded-xl backdrop-blur border p-1 md:p-8  gap-5'}>
 
-                        <div className={'box-content w-full p-5'}>
+                        <div className={'box-content p-5'}>
                             <div className={'intro mb-2'}>
                                 Berdasarkan hasil perhitungan menggunakan metode Demster-shafer dari gejala yang terjadi
                                 pada ayam,
@@ -79,15 +79,12 @@ export default function ResultDiagnose() {
                                         // @ts-ignore
                                         result?(result.penyakit.nama_penyakit):''
                                     }
-                                    {/*<label className={'italic text-sm text-gray-600 px-2 font-normal '}>*/}
-                                    {/*    (Avian influenza)*/}
-                                    {/*</label>*/}
                                 </h1>
                             </div>
                             <Separator/>
                             <div className={'gejala my-2'}>
                                 <h2 className={'text-md font-medium my-2'}>Gejala Yang terjadi :</h2>
-                                <div className={'gejala-terjadi p-3 border rounded-lg px-7' }>
+                                <div className={'gejala-terjadi p-3 border rounded-lg md:px-7 ' }>
                                     <ul className={'list list-inside list-disc'}>
                                         {                                        // @ts-ignore
 
@@ -141,7 +138,7 @@ export default function ResultDiagnose() {
                                 <Link href={'/homepage'} className={'rounded-full bg-primary text-white px-8 py-3'}>Kembali Ke Halaman Utama</Link>
                             </div>
                         </div>
-                        <div id={'image'} className={'lg:right-10 lg:top-10 aspect-square'}>
+                        <div id={'image'} className={'lg:right-10 lg:top-10 aspect-square p-4'}>
                             <Image src={'/img/default.png'} className={'rounded-2xl'} alt={'Gambar Penyakit'}
                                    width={500} height={250}/>
                             <p className={'py-2'}>

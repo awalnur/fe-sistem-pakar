@@ -74,7 +74,7 @@ export default function Penyakit() {
                 </div>
 
                 <div className={'relative w-full top-20 xl:px-64 xl:py-16 flex xl:gap-5'}>
-                    <div className={'sticky z-50 top-24 h-fit w-3/12 rounded-xl border'}>
+                    <div className={'hidden md:flex sticky z-50 top-24 h-fit w-3/12 rounded-xl border'}>
                         <div
                             data-collapsed={isCollapsed}
                             className="sticky group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2"
@@ -127,9 +127,21 @@ export default function Penyakit() {
                             </div>
                         </Card>
                     ) : (
-                        <Card className={'flex w-full bg-[#ffffff90] rounded-xl backdrop-blur border p-8  gap-5'}>
+                        <Card className={'flex w-full bg-[#ffffff90] rounded-xl backdrop-blur border md:p-8 p-4  gap-5'}>
 
                             <div className={'box-content w-full p-5'}>
+                                <div id={'image'} className={' md:hidden lg:right-10 lg:top-10 aspect-square'}>
+                                    <Image src={
+                                        // @ts-ignore
+                                        detailpenyakit.gambar ? ('/uploads/' + detailpenyakit.gambar) : ('/img/default.png')}
+                                           className={'rounded-2xl'} alt={'Gambar Penyakit'}
+                                           width={500} height={250}/>
+                                    <p className={'py-2'}>
+                                        {
+                                            // @ts-ignore
+                                            detailpenyakit.nama_penyakit}
+                                    </p>
+                                </div>
                                 <div id={'title'}>
 
                                     <h1 className={'text-xl font-bold'}>
@@ -148,7 +160,8 @@ export default function Penyakit() {
                                     <hr className={'w-4/12 mb-2'}/>
                                     <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{
                                         // @ts-ignore
-                                        __html: detailpenyakit.definisi }}>
+                                        __html: detailpenyakit.definisi
+                                    }}>
 
                                     </p>
                                 </div>
@@ -157,16 +170,19 @@ export default function Penyakit() {
                                     <hr className={'w-4/12 mb-2'}/>
                                     <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{
                                         // @ts-ignore
-                                        __html:detailpenyakit.penularan}}>
+                                        __html: detailpenyakit.penularan
+                                    }}>
 
                                     </p>
                                 </div>
                                 <div className={'Deskripsi my-2'}>
                                     <h2 className={'font-medium text-lg my-2'}> Pencegahan</h2>
                                     <hr className={'w-4/12 mb-2'}/>
-                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{__html:
+                                    <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{
+                                        __html:
                                         // @ts-ignore
-                                        detailpenyakit.pencegahan }}>
+                                        detailpenyakit.pencegahan
+                                    }}>
                                         {/*{detailpenyakit.pencegahan}*/}
                                     </p>
                                 </div>
@@ -176,14 +192,16 @@ export default function Penyakit() {
                                     <hr className={'w-4/12 mb-2'}/>
                                     <p className={'text-justify text-sm'} dangerouslySetInnerHTML={{
                                         // @ts-ignore
-                                        __html: detailpenyakit.penanganan }}>
+                                        __html: detailpenyakit.penanganan
+                                    }}>
                                     </p>
                                 </div>
                             </div>
-                            <div id={'image'} className={'lg:right-10 lg:top-10 aspect-square'}>
+                            <div id={'image'} className={'hidden md:block lg:right-10 lg:top-10 aspect-square'}>
                                 <Image src={
                                     // @ts-ignore
-                                    detailpenyakit.gambar?('/uploads/'+detailpenyakit.gambar):('/img/default.png')} className={'rounded-2xl'} alt={'Gambar Penyakit'}
+                                    detailpenyakit.gambar ? ('/uploads/' + detailpenyakit.gambar) : ('/img/default.png')}
+                                       className={'rounded-2xl'} alt={'Gambar Penyakit'}
                                        width={500} height={250}/>
                                 <p className={'py-2'}>
                                     {

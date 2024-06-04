@@ -60,9 +60,9 @@ export default function DetailRiwayat() {
                     <div className={'title w-full lg:p-8'}>
                         <h1 className={'text-center font-bold text-xl'}>Riwayat Diagnosa</h1>
                     </div>
-                    <Card className={'flex w-full bg-[#ffffff90] rounded-xl backdrop-blur border px-8 p-2  gap-5'}>
+                    <Card className={'flex flex-col md:flex-row w-full bg-[#ffffff90] rounded-xl backdrop-blur border p-5 md:px-8 p-2  gap-5'}>
 
-                        <div className={'box-content w-full p-5'}>
+                        <div className={'box-content p-5'}>
                             <div className={'my-5'}>
                                 <Link href={'/riwayat'} className={'rounded-full bg-primary text-white px-8 py-3'}>Kembali
                                     Ke Halaman Riwayat</Link>
@@ -100,9 +100,10 @@ export default function DetailRiwayat() {
                             <div className={'Deskripsi my-2'}>
                                 <h2 className={'font-medium text-md my-2 pt-5'}> Tentang DetailRiwayat</h2>
                                 <hr className={'w-4/12 mb-2'}/>
-                                <p className={'text-justify  py-2'}>
+                                {/*@ts-ignore*/}
+                                <p className={'text-justify  py-2'} dangerouslySetInnerHTML={{__html:result ? (result.penyakit.definisi) : ''}}>
                                     {// @ts-ignore
-                                        result ? (result.penyakit.definisi) : ''
+                                        // result ? (result.penyakit.definisi) : ''
                                     }
                                 </p>
                             </div>
@@ -111,23 +112,26 @@ export default function DetailRiwayat() {
                             <div className={'Deskripsi my-2'}>
                                 <h2 className={'font-medium text-lg my-2'}> Penularan</h2>
                                 <hr className={'w-4/12 mb-2'}/>
-                                <p className={'text-justify py-2'}>
-                                    {// @ts-ignore
-                                        result ? (result.penyakit.penularan) : '-'
+                                {/*@ts-ignore*/}
+                                <p className={'text-justify  py-2'} dangerouslySetInnerHTML={{__html:result ? (result.penyakit.penularan) : ''}}>
+                                {// @ts-ignore
+                                        // result ? (result.penyakit.penularan) : '-'
                                     }
                                 </p>
                             </div>
                             <div className={'Deskripsi my-2'}>
                                 <h2 className={'font-medium text-lg my-2'}> Pencegahan</h2>
                                 <hr className={'w-4/12 mb-2'}/>
-                                <p className={'text-justify py-2'}>
-                                    {// @ts-ignore
-                                        result ? (result.penyakit.pencegahan) : '-'
+                                {/*@ts-ignore*/}
+                                <p className={'text-justify  py-2'} dangerouslySetInnerHTML={{__html:result ? (result.penyakit.pencegahan) : ''}}>
+
+                                {// @ts-ignore
+                                        // result ? (result.penyakit.pencegahan) : '-'
                                     }
                                 </p>
                             </div>
                         </div>
-                        <div id={'image'} className={'lg:right-10 lg:top-10 aspect-square'}>
+                        <div id={'image'} className={'lg:right-10 lg:top-10 aspect-square p-5'}>
                             <Image src={'/img/default.png'} className={'rounded-2xl'} alt={'Gambar Penyakit'}
                                    width={500} height={250}/>
                             <p className={'py-2'}>

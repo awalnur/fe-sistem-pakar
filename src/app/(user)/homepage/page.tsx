@@ -1,6 +1,6 @@
 "use client"
-import Image from "next/image";
-import {Button, buttonVariants} from "@/components/ui/button";
+
+import {Button} from "@/components/ui/button";
 import {Card} from "@/components/ui/card";
 
 import {Calendar, MapPin} from "lucide-react";
@@ -13,14 +13,6 @@ import {Header} from "@/lib/header";
 const BE_URL = process.env.NEXT_PUBLIC_BE_URL
 
 
-interface NavProps {
-    isCollapsed: boolean
-    links: {
-        title: string
-        label?: string
-        variant: "default" | "ghost"
-    }[]
-}
 export default function HomePage() {
     const [dataRiwayat, setRiwayat] = useState([])
     const [isCollapsed, setIsCollapsed] = useState(false)
@@ -54,11 +46,11 @@ export default function HomePage() {
         <main className="block">
             <div className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24  ">
 
-                <div className={"absolute -z-40 3xl:w-6/12 lg:w-8/12 right-0 bg-hero-pattern h-screen bg-cover "}>
+                <div className={"fixed w-full -z-40 3xl:w-6/12 lg:w-8/12 right-0 bg-hero-pattern h-screen bg-cover "}>
                 </div>
 
                 <div className={'relative w-full top-20 xl:px-64 p-6 xl:py-16 flex lg:gap-5'}>
-                    <div className={'sticky z-40 top-24 h-fit w-3/12 rounded-xl border'}>
+                    <div className={'hidden md:block sticky z-40 top-24 h-fit w-3/12 rounded-xl border'}>
                         <div
                             data-collapsed={isCollapsed}
                             className="sticky group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2"
@@ -118,13 +110,13 @@ export default function HomePage() {
                             <h1 className={'font-medium text-md border-b w-fit pr-16 pb-1'}>
                                 Riwayat Diagnosa
                             </h1>
-                            <div className={'flex gap-5'}>
+                            <div className={'flex flex-col md:flex-row gap-5'}>
 
 
                                 {
                                     dataRiwayat.length > 0 ? (dataRiwayat.map((item, index) => (
                                         <Card key={index}
-                                              className={'flex lg:w-4/12 p-2 gap-5 rounded-2xl backdrop-blur bg-[#ffffff99]'}>
+                                              className={'flex  lg:w-4/12 p-2 gap-5 rounded-2xl backdrop-blur bg-[#ffffff99]'}>
                                             <div
                                                 className={'presentase flex flex-col align-middle aspect-square p-4 text-lg my-auto bg-gray-100 rounded-2xl'}>
                                                 <p className={'text-xs text-center text-gray-600 mt-auto'}>Akurasi</p>

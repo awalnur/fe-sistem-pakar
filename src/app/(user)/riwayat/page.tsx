@@ -179,11 +179,10 @@ export default function Riwayat() {
         <main className="block">
             <div className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24  ">
 
-                <div className={"absolute -z-40 3xl:w-6/12 lg:w-8/12 right-0 bg-hero-pattern h-screen bg-cover "}>
+                <div className={"fixed -z-40 3xl:w-6/12 w-full lg:w-8/12 right-0 bg-hero-pattern h-screen bg-cover"}>
                 </div>
-
                 <div className={'relative w-full top-20 xl:px-64 p-6 xl:py-16 flex lg:gap-5'}>
-                    <div className={'sticky z-50 top-24 h-fit w-3/12 rounded-xl border'}>
+                    <div className={'hidden md:block sticky z-40 top-24 h-fit w-3/12 rounded-xl border'}>
                         <div
                             data-collapsed={isCollapsed}
                             className="sticky group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2"
@@ -193,25 +192,26 @@ export default function Riwayat() {
                             <Separator className={'border'}/>
 
                             <Nav
+
                                 isCollapsed={isCollapsed}
                                 links={[
                                     {
                                         title: "Dashboard",
                                         label: "",
                                         variant: "ghost",
-                                        uri:'/homepage',
+                                        uri: '/homepage',
                                     },
                                     {
                                         title: "Riwayat Diagnosa",
                                         label: "",
                                         variant: "default",
-                                        uri:'/riwayat',
+                                        uri: '/riwayat',
                                     },
                                     {
                                         title: "Profil",
                                         label: "",
                                         variant: "ghost",
-                                        uri:'/profil',
+                                        uri: '/profil',
 
                                     }
                                 ]}
@@ -219,12 +219,12 @@ export default function Riwayat() {
                         </div>
                     </div>
                     <div className={'content flex flex-col w-full'}>
-                        <div className={'pb-4'}>
+                    <div className={'pb-4'}>
                             <h1 className={'text-lg font-bold'}>Riwayat</h1>
                             <p className={'text-sm font-normal text-gray-600'}>Halaman homepage Pengguna</p>
                         </div>
                         <Card className={'flex w-full transition duration-150 bg-[#ffffff90] rounded-2xl backdrop-blur border px-4 py-2  gap-5'}>
-                            <div className={'box-content w-full p-5'}>
+                            <div className={'box-content w-full md:p-5 p-1'}>
                                 <div className={'flex w-full'}>
                                     <div className={'w-full'}>
                                         <h1 className={'text-lg font-bold'}>

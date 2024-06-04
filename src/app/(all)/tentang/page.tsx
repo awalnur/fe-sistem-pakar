@@ -5,11 +5,11 @@ export default function Tentang() {
     return (
         <div>
             <main className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24  ">
-                <div className={"absolute -z-40 xl:w-6/12 right-0 bg-hero-pattern h-screen bg-cover "}>
+                <div className={"fixed w-full md:absolute -z-40 xl:w-6/12 right-0 bg-hero-pattern h-screen bg-cover "}>
                 </div>
 
                 <div
-                    className="relative flex flex-col lg:gap-5 xl:top-64 z-50 left-0 xl:px-64 w-full justify-between font-mono text-sm lg:flex p-8 xl:p-16">
+                    className="relative top-40 flex flex-col lg:gap-5 xl:top-64 z-30 left-0 xl:px-64 w-full justify-between font-mono text-sm lg:flex p-8 xl:p-16">
                     <div className={'text-black backdrop-blur border xl:px-12 xl:py-8 px-6 py-3 rounded-2xl'}>
                         <h1 className={'title text-xl font-bold font-sans lg:w-5/12'}>
                             Tentang
