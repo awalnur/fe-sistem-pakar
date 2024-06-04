@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Admin",
-    description: "AGRI ADMIN PAGE",
+    description: "AGRI ADMIN PAGE" ,
 };
 
 export default function RootLayout({
