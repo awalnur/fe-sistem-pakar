@@ -117,7 +117,9 @@ export default function RootLayout({ children }) {
                       onClick={() => setIsShowAside(prevState => !prevState)}><ListCollapse/></Button>
           </div>
           <div className="nav-logo mx-auto md:mx-0 center">
-              <Image alt={'logo Image'} className={"md:h-12 "} src="/img/logo-nav.png" width={100} height={100}/>
+              <Link href={'/'}>
+                <Image alt={'logo Image'} className={"md:h-12 "} src="/img/logo-nav.png" width={100} height={100}/>
+              </Link>
           </div>
           <div className="md:flex text-black hidden ml-16 my-auto flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">
               <Link href="/">Home</Link>

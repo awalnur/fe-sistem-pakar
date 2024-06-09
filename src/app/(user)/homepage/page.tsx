@@ -17,8 +17,29 @@ export default function HomePage() {
     const [dataRiwayat, setRiwayat] = useState([])
     const [isCollapsed, setIsCollapsed] = useState(false)
     const [isLoading, setLoading] = useState(false)
+    const [current_user, setUser]= useState(null);
+    async function fetchUser(){
+        try {
+            // page=page>0?page-1:0
+            const response = await fetch(BE_URL + '/v1/user/current_user',
+                {
+                    method: 'GET',
+                    headers: Header()
+                });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const userdata = await response.json();
+
+            setUser(userdata)
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
 
     useEffect(() => {
+        fetchUser()
         const fetchData = async () => {
             try {
                 const response = await fetch(BE_URL + '/v1/riwayat/last',
@@ -95,11 +116,11 @@ export default function HomePage() {
                             <div className={'box-content w-full p-5'}>
                                 <div id={'title'}>
                                     <h1 className={'text-xl font-bold'}>
-                                        Selamat Datang, <b>User</b> di AGRI Chicken Health Diagnose
+                                        {/*@ts-ignore*/}
+                                        Selamat Datang, <b>{current_user?current_user.username:' Pengguna '}</b> di AGRI Chicken Health Diagnose
                                     </h1>
                                     <p className={'text-sm text-gray-600 py-1 mt-2 '}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis erat non
-                                        pellentesque dignissim.
+                                        AGRI Chicken Health Diagnose adalah platform inovatif yang dirancang untuk membantu peternak ayam dalam mendiagnosis kesehatan ayam mereka secara cepat dan akurat. Dengan menggunakan teknologi canggih, kami menyediakan solusi kesehatan ternak yang dapat diandalkan untuk memastikan kesejahteraan dan produktivitas optimal pada peternakan Anda.
                                     </p>
                                 </div>
                                 <div className={'flex pt-8'}>
