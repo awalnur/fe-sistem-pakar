@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
     const [isShowAside, setIsShowAside] = useState(false);
 
     const [loading, setLoading] = useState(true);
-    async function fetchUser(limit=10, page=1, search=''){
+    async function fetchUser(){
         try {
             // page=page>0?page-1:0
             const response = await fetch(BE_URL + '/v1/user/current_user',
@@ -47,13 +47,16 @@ export default function RootLayout({ children }) {
                     headers: Header()
                 });
             if (!response.ok) {
+                if (response.status === 401) {
+                    router.push('/login')
+                }
                 throw new Error('Failed to fetch data');
             }
             const userdata = await response.json();
 
             if (userdata['level'] == 'Admin') {
                 localStorage.removeItem('login');
-                router.push('/login')
+                // router.push('/login')
             }else{
                 setUser(userdata)
             }
@@ -66,13 +69,10 @@ export default function RootLayout({ children }) {
         }
     }
 
-    useEffect(() => {
-    }, []);
-
   useEffect(() => {
       const login = cekLogin()
 
-      console.log(cekLogin(), 'check login')
+      // console.log(cekLogin(), 'check login')
       if (login===null || login==='false'){
           router.push('/login')
           setIsLoggedIn(false);
@@ -82,9 +82,9 @@ export default function RootLayout({ children }) {
           setLoading(false);
       }
 
-      fetchUser()
+      fetchUser().then(r => {})
 
-  }, []);
+  }, [isLoggedIn]);
     const goPage=(uri:string)=>{
         router.push(uri)
     }
@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
           <div className={'fixed h-full w-full z-40 bg-[#00000080] backdrop-blur'} >
               <aside className={"fixed inset-0 h-full top-0 p-10 pt-20 flex flex-col gap-5 z-50 left-0 w-5/6 bg-white"}>
 
-                  <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/">Homepage</Link>
+                  <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/">Home</Link>
                   <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/penyakit">Penyakit</Link>
                   <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/tentang">Tentang</Link>
               </aside>
@@ -120,7 +120,7 @@ export default function RootLayout({ children }) {
               <Image alt={'logo Image'} className={"md:h-12 "} src="/img/logo-nav.png" width={100} height={100}/>
           </div>
           <div className="md:flex text-black hidden ml-16 my-auto flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">
-              <Link href="/">Homepage</Link>
+              <Link href="/">Home</Link>
               <Link href="/penyakit">Penyakit</Link>
               <Link href="/tentang">Tentang</Link>
           </div>

@@ -10,7 +10,7 @@ export const TopNav = () => {
         </div>
         <div className="text-black ml-16 my-auto flex flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">
     <Link href="/" legacyBehavior passHref>
-    Homepage
+    Home
     </Link>
     <Link href="/penyakit" legacyBehavior passHref>
     Penyakit

@@ -221,7 +221,7 @@ export default function Riwayat() {
                     <div className={'content flex flex-col w-full'}>
                     <div className={'pb-4'}>
                             <h1 className={'text-lg font-bold'}>Riwayat</h1>
-                            <p className={'text-sm font-normal text-gray-600'}>Halaman homepage Pengguna</p>
+                            <p className={'text-sm font-normal text-gray-600'}>Halaman Dashboard Pengguna</p>
                         </div>
                         <Card className={'flex w-full transition duration-150 bg-[#ffffff90] rounded-2xl backdrop-blur border px-4 py-2  gap-5'}>
                             <div className={'box-content w-full md:p-5 p-1'}>

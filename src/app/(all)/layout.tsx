@@ -42,6 +42,8 @@ export default function RootLayout({ children }) {
       setIsLoggedIn(true);
       setLoading(false);
     }
+    setLoading(false);
+
   }, []);
   const goPage=(uri:string)=>{
       router.push(uri)
@@ -61,14 +63,14 @@ export default function RootLayout({ children }) {
       <div className={'fixed h-full w-full z-40 bg-[#00000080] backdrop-blur'} >
         <aside className={"fixed inset-0 h-full top-0 p-10 pt-20 flex flex-col gap-5 z-50 left-0 w-5/6 bg-white"}>
 
-          <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/">Homepage</Link>
+          <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/">Home</Link>
           <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/penyakit">Penyakit</Link>
           <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/tentang">Tentang</Link>
         </aside>
 
       </div>
           ):''}
-      <nav className="fixed backdrop-blur border-b-[#f0f0f050] border-b top-0 z-50 flex w-full bg-transparent px-5 py-3 lg:px-16 lg:py-3 xl:px-64">
+      <nav className="fixed backdrop-blur border-b-[#f0f0f050] border-b top-0 z-50 flex w-full bg-transparent px-5 py-3 lg:px-16 lg:py-3 2xl:px-64">
         <div className="flex flex-wrap md:hidden items-center justify-center w-fit">
           <Button className={'text-black'} variant={'ghost'} onClick={()=>setIsShowAside(prevState => !prevState)}><ListCollapse/></Button>
         </div>
@@ -77,7 +79,7 @@ export default function RootLayout({ children }) {
         </div>
         <div className="md:flex text-black hidden ml-16 my-auto flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">
         {/*<div className="fixed h-full bg-white md:flex text-black ml-16 my-auto flex-row gap-3 xl:text-lg xl:gap-5" id="Menu">*/}
-          <Link href="/">Homepage</Link>
+          <Link href="/">Home</Link>
           <Link href="/penyakit">Penyakit</Link>
           <Link href="/tentang">Tentang</Link>
         </div>

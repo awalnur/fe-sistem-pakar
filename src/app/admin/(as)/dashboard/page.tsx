@@ -10,16 +10,17 @@ import {HeartCrack, SquareActivity, Stethoscope, Users2} from "lucide-react";
 import {useEffect, useState} from "react";
 
 import {Header} from "@/lib/header";
+import {useRouter} from "next/navigation";
 const BE_URL = process.env.NEXT_PUBLIC_BE_URL
 
-export default function DashboardPage() {
+export default function Dashboard() {
     const mapData = dataJson
     const [data, setData] = useState([])
     const [totalGejala, setTotalGejala] = useState(0)
     const [totalPenyakit, setTotalPenyakit] = useState(0)
     const [totalUser, setTotalUser] = useState(0)
     const [totalDiagnosa, setTotalDiagnosa] = useState(0)
-
+    const router = useRouter()
     async function fetchData(){
             // page=page>0?page-1:0
             const response = await fetch(BE_URL + '/v1/admin/graph',
@@ -28,15 +29,18 @@ export default function DashboardPage() {
                     headers: Header()
                 });
             if (!response.ok) {
-                throw new Error('Failed to fetch data');
+                if (response.status === 401){
+                    router.push('/admin/login')
+                }
+            }else{
+
+                const data = await response.json();
+                setData(data['data']['entries'])
+                setTotalDiagnosa(data['data']['total_diagnosa'])
+                setTotalPenyakit(data['data']['total_penyakit'])
+                setTotalUser(data['data']['total_pengguna'])
+                setTotalGejala(data['data']['total_gejala'])
             }
-            const data = await response.json();
-            setData(data['data']['entries'])
-            setTotalDiagnosa(data['data']['total_diagnosa'])
-            setTotalPenyakit(data['data']['total_penyakit'])
-            setTotalUser(data['data']['total_pengguna'])
-            setTotalGejala(data['data']['total_gejala'])
-            console.log('Response data:', data['data']['entries']);
     }
 
     useEffect(() => {

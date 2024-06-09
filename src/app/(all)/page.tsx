@@ -6,14 +6,15 @@ import {Card} from "@/components/ui/card";
 export default function Home() {
   return (
       <div>
-        <main className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24 xl:px-64 lg:px-32 p-8 ">
-          <div className={"absolute -z-40 lg:w-8/12 w-full xl:w-6/12 right-0 bg-hero-pattern h-screen bg-cover "}>
+        <main
+            className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24 2xl:px-64 lg:px-32 p-8 ">
+          <div className={"fixed -z-40 lg:w-8/12 w-full 2xl:w-6/12 right-0 bg-hero-pattern h-screen bg-cover "}>
           </div>
 
           <Card
-              className="relative bg-[#ffffff99] flex flex-col lg:gap-5 lg:top-36 xl:top-64 top-20 z-30 xl:w-6/12 border-0 rounded-2xl backdrop-blur md:w-full left-0 p-8 w-full justify-between font-mono text-sm lg:flex mr-auto ">
+              className="relative bg-[#ffffff99] flex flex-col lg:gap-5 lg:top-36 xl:top-64 top-20 z-30 lg:w-6/12 border-0 rounded-2xl backdrop-blur md:w-full left-0 p-8 w-full justify-between font-mono text-sm lg:flex mr-auto ">
             <div className={'text-black'}>
-              <h1 className={'title  text-xl md:text-5xl font-bold font-sans '}>
+              <h1 className={'title  text-xl 2xl:text-5xl font-bold font-sans '}>
                 Kenali Masalahnya, Temukan
                 Solusinya
               </h1>
@@ -26,11 +27,12 @@ export default function Home() {
           </Card>
 
 
-          <div className="p-15 flex  md:flex-row flex-col justify-between text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left border-2 rounded-full backdrop-blur">
+          <div
+              className="lg:p-15 flex bg-[#ffffff80] md:flex-row flex-col justify-between text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left border-2 rounded-3xl lg:rounded-full backdrop-blur">
             <div
-                className="group rounded-sm border border-transparent py-2 md:px-5 md:py-4 transition-colors my-auto ml-4 md:ml-8 "
+                className="group rounded-sm border border-transparent py-2 md:px-5 md:py-4 transition-colors my-auto ml-4 md:ml-8 mx-2"
             >
-              <h2 className={`mb-1 md:text-2xl font-semibold`}>
+              <h2 className={`mb-1 text-lg lg:text-xl 2xl:text-2xl font-semibold`}>
                 Ada masalah pada kesehatan Ayam Anda? {" "}
               </h2>
               <p className={`m-0 text-sm md:opacity-50`}>
@@ -43,7 +45,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-              <h2 className={`md:text-lg font-semibold`}>
+              <h2 className={`text-sm lg:text-lg font-semibold`}>
                 Diagnosa Sekarang {" "}
                 <span
                     className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">

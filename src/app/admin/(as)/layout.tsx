@@ -1,10 +1,9 @@
 'use client'
-import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import React, {useEffect, useState} from "react";
 import {Toaster} from "@/components/ui/toaster";
 import {Button} from "@/components/ui/button";
-import {ChevronDown, ChevronRight, History, List, ListCollapse, LogOut, Settings, User} from "lucide-react";
+import {ChevronDown, ChevronRight, History, List, ListCollapse, Loader2, LogOut, Settings, User} from "lucide-react";
 import {Nav} from "@/components/Nav";
 import {
     DropdownMenu,
@@ -18,15 +17,13 @@ import {
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
 import {redirect, usePathname, useRouter} from "next/navigation";
-import type { Metadata } from "next";
 import {Header} from "@/lib/header";
 import Link from "next/link";
+import {cn} from "@/lib/utils";
+import {className} from "postcss-selector-parser";
 
-const inter = Inter({ subsets: ["latin"] });
 
 const BE_URL = process.env.NEXT_PUBLIC_BE_URL
 
@@ -95,8 +92,9 @@ export default function RootLayout({
     const access = getAccess()
     const router = useRouter()
     const path = usePathname().split('/')
+    const [loading, setLoading] = useState(true);
 
-    async function fetchUser(limit=10, page=1, search=''){
+    async function fetchUser(){
         try {
             // page=page>0?page-1:0
             const response = await fetch(BE_URL + '/v1/user/current_user',
@@ -105,28 +103,31 @@ export default function RootLayout({
                     headers: Header()
                 });
             if (!response.ok) {
-                throw new Error('Failed to fetch data');
+
+                router.push('/admin/login')
+                // throw new Error('Failed to fetch data');
             }
             const userdata = await response.json();
 
             if (userdata['level'] == 'Pengguna') {
                 localStorage.removeItem('adminLogin');
-                router.push('/admin/login')
+                redirect('/admin/login')
             }else{
+
+                setLoading(false)
                 setUser(userdata)
             }
 
         } catch (error) {
-            console.error('Error fetching data:', error);
-
             localStorage.removeItem('adminLogin');
             router.push('/admin/login')
         }
     }
-
     useEffect(() => {
-        fetchUser()
+
+            fetchUser()
     }, []);
+
 
     function HandleLogouts()  {
 
@@ -144,6 +145,14 @@ export default function RootLayout({
 
     return (
         <div className={'flex  bg-gray-200 bg-cover bg-fixed'}>
+            { loading ? (
+
+                <div className={'absolute z-50 w-full h-full bg-transparent backdrop-blur flex'}>
+                    <Loader2
+                        className={cn('my-28 h-20 w-20 text-primary/80 animate-spin m-auto', className)}
+                    />
+                </div>
+            ) : (null)}
             <Nav links={link} isCollapsed={false} current_user={
                 // @ts-ignore
                 current_user?current_user.username:'-'}/>
@@ -174,10 +183,10 @@ export default function RootLayout({
                                 <DropdownMenuSeparator/>
                                 <DropdownMenuGroup>
                                     <Link href={'/admin/profil'}>
-                                                                            <DropdownMenuItem>
-                                        <User className="mr-2 h-4 w-4"/>
-                                        <span>Profile</span>
-                                    </DropdownMenuItem>
+                                        <DropdownMenuItem>
+                                            <User className="mr-2 h-4 w-4"/>
+                                            <span>Profile</span>
+                                        </DropdownMenuItem>
 
                                     </Link>
 
@@ -193,7 +202,6 @@ export default function RootLayout({
                 </div>
 
                 <div className="flex p-8 mt-16 w-full flex-col z-10">
-
                     <Breadcrumb>
                         <BreadcrumbList>
 
@@ -201,14 +209,14 @@ export default function RootLayout({
                                 path.map((item, index)=>(
 
                                         index != 0?(
-                                        <BreadcrumbItem key={index} >
-                                            <BreadcrumbLink href={
-                                                // @ts-ignore
-                                                "/"+(index==1?path[index]:(index==2?(path[1]+'/'+path[index]):(index==3?(path[1]+'/'+path[2]+'/'+path[index]):(''))))} className={'capitalize flex flex-row'}> <ChevronRight className={'h-4 my-auto'}/>{item}</BreadcrumbLink>
-                                        </BreadcrumbItem>
+                                            <BreadcrumbItem key={index} >
+                                                <BreadcrumbLink href={
+                                                    // @ts-ignore
+                                                    "/"+(index==1?path[index]:(index==2?(path[1]+'/'+path[index]):(index==3?(path[1]+'/'+path[2]+'/'+path[index]):(''))))} className={'capitalize flex flex-row'}> <ChevronRight className={'h-4 my-auto'}/>{item}</BreadcrumbLink>
+                                            </BreadcrumbItem>
                                         ):('')
 
-                                )
+                                    )
                                 )                            }
 
                         </BreadcrumbList>
@@ -221,7 +229,5 @@ export default function RootLayout({
 
             </main>
         </div>
-        // </body>
-        // </html>
     );
 }

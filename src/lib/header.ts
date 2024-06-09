@@ -17,5 +17,6 @@ export function Header() : headerinit | undefined {
         header = {'Content-Type': 'application/json',
             "Authorization": "Bearer "};
     }
+    // console.log(token)
     return header
 }

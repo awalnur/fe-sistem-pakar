@@ -74,16 +74,16 @@ export default function Penyakit() {
 
     return (
         <main className="block">
-            <div className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24  ">
-                <div className={"fixed w-full -z-40 xl:w-6/12 right-0 bg-hero-pattern h-screen bg-cover "}>
+            <div className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24 px-2 ">
+                <div className={"fixed w-full -z-40 xl:w-8/12 2xl:w-6/12 right-0 bg-hero-pattern h-screen bg-cover "}>
                 </div>
                 <div
-                    className="relative top-52 flex flex-col w-full lg:gap-5 xl:top-64 z-30 left-0 justify-between font-mono text-sm lg:flex mb-64 h-auto">
+                    className="relative top-32 flex flex-col w-full lg:gap-5 lg:top-36 2xl:top-52 z-30 left-0 justify-between font-mono text-sm lg:flex mb-36 2xl:mb-64 h-auto">
                     <div className={'text-black'}>
-                        <h1 className={'title text-xl font-bold text-center'}>
+                        <h1 className={'title text-lg lg:text-xl font-bold text-center'}>
                             Temukan data penyakit ayam
                         </h1>
-                        <p className={'descriptif text-center text-gray-600 mx-auto mt-2'}>
+                        <p className={'descriptif text-center text-gray-600 mx-auto mt-2 px-2'}>
                             Cari tau dan cek data penyakit ayam yang ada.
                         </p>
                     </div>
@@ -95,7 +95,7 @@ export default function Penyakit() {
                                         control={form.control}
                                         name={`searhcinput`}
                                         render={({field}) => (
-                                            <FormItem className={'w-full xl:-mr-28 border-20'}>
+                                            <FormItem className={'w-full -mr-28 border-20'}>
                                                 <FormControl>
                                                     <Input placeholder="Cari Data Penyakit" {...field}
                                                            onKeyUp={form.handleSubmit(onSubmit)}
@@ -112,13 +112,13 @@ export default function Penyakit() {
                         </Card>
 
                     </div>
-                    <div id={'latest'} className={'w-full xl:px-96 xl:py-20 my-15'}>
+                    <div id={'latest'} className={'w-full lg:p-16 2xl:px-64 xl:py-10 '}>
                         <div className={'title'}>
                             <h1 className={'xl:text-2xl font-bold font-sans py-3 px-5'}>
-                                {hasilPencarian ? 'Hasil Pencarian' : 'Banyak di cari'}
+                                {hasilPencarian ? 'Hasil Pencarian' : 'Data Penyakit'}
                             </h1>
                         </div>
-                        <div className={'w-full grid grid-cols-1 md:grid-cols-3 gap-5 p-4'}>
+                        <div className={'w-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 p-4'}>
                             {isLoading ? (
                                 <p>Loading...</p>
                             ) : (
@@ -129,7 +129,9 @@ export default function Penyakit() {
                                                 className={'col-span-1 h-28 backdrop-blur bg-[#ffffff80] p-2 xl:p-4 flex rounded-2xl gap-2'}
                                                 key={penyakit.nama_penyakit}>
                                                 <div className={'image aspect-square'}>
-                                                    <Image src={'/img/default.png'} className={'rounded-xl'} alt={'img'}
+                                                    <Image src={
+                                                        // @ts-ignore
+                                                        penyakit.gambar ? (BE_URL+'/v1/assets?images='+penyakit.gambar) : ('/img/default.png')} className={'rounded-xl'} alt={'img'}
                                                            width={500} height={500}></Image>
                                                 </div>
                                                 <div className={'w-full mx-2'}>
@@ -157,11 +159,11 @@ export default function Penyakit() {
                     </div>
                 </div>
                 <div
-                    className="p-15 flex  md:flex-row flex-col justify-between text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left border-2 rounded-full backdrop-blur">
+                    className="lg:p-15 flex bg-[#ffffff80] md:flex-row flex-col justify-between text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left border-2 rounded-3xl lg:rounded-full backdrop-blur">
                     <div
-                        className="group rounded-sm border border-transparent py-2 md:px-5 md:py-4 transition-colors my-auto ml-4 md:ml-8 "
+                        className="group rounded-sm border border-transparent py-2 md:px-5 md:py-4 transition-colors my-auto ml-4 md:ml-8 mx-2"
                     >
-                        <h2 className={`mb-1 md:text-2xl font-semibold`}>
+                        <h2 className={`mb-1 text-lg lg:text-xl 2xl:text-2xl font-semibold`}>
                             Ada masalah pada kesehatan Ayam Anda? {" "}
                         </h2>
                         <p className={`m-0 text-sm md:opacity-50`}>

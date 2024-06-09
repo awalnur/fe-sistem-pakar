@@ -52,6 +52,7 @@ export default function ResultDiagnose() {
     // @ts-ignore
     // @ts-ignore
     // @ts-ignore
+    // @ts-ignore
     return (
         <main className="block">
             <div className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24 md:px-16 px-4 ">
@@ -65,26 +66,55 @@ export default function ResultDiagnose() {
                     </div>
                     <Card className={'flex flex-col md:flex-row w-full bg-[#ffffff90] rounded-xl backdrop-blur border p-1 md:p-8  gap-5'}>
 
-                        <div className={'box-content p-5'}>
+                        <div className={'box-content p-5 lg:w-9/12'}>
                             <div className={'intro mb-2'}>
                                 Berdasarkan hasil perhitungan menggunakan metode Demster-shafer dari gejala yang terjadi
                                 pada ayam,
                                 sistem menyimpulkan hasil sebagai berikut:
                             </div>
                             <Separator/>
+
                             <div id={'title'}>
                                 <h2 className={'text-md font-medium my-2'}>Nama Penyakit :</h2>
                                 <h1 className={'text-lg font-bold border p-3 rounded-xl bg-gray-50'}>
                                     {
                                         // @ts-ignore
-                                        result?(result.penyakit.nama_penyakit):''
+                                        result ? (result.penyakit.nama_penyakit) : ''
                                     }
                                 </h1>
+                            </div>
+                            <div id={'image'}
+                                 className={'block lg:hidden lg:right-10 lg:top-10 aspect-square p-4 lg:w-3/12'}>
+                                <Image src={
+                                    // @ts-ignore
+                                    result ? result.penyakit.gambar ? (BE_URL + '/v1/assets?images=' + result.penyakit.gambar) : ('/img/default.png') : ('/img/default.png')
+                                } className={'rounded-2xl'} alt={'Gambar Penyakit'}
+                                       width={500} height={250}/>
+                                <p className={'py-2'}>
+                                    {
+                                        // @ts-ignore
+                                        result ? result.penyakit.nama_penyakit : ''
+                                    }
+                                </p>
+
+                                <div className={'persentase flex flex-col my-5 gap-5 w-full'}>
+                                    <h1 className={'font-bold'}>Presentase Tingkat Kepercayaan : </h1>
+                                    <div className={'presentase p-10'}>
+                                        {" "}
+                                        <CircularProgressbar                                        // @ts-ignore
+
+                                            value={(result ? (result.persentase) : (0))}                                        // @ts-ignore
+                                            // @ts-ignore
+
+                                            text={(result ? (result.persentase) : (0)) + `%`}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                             <Separator/>
                             <div className={'gejala my-2'}>
                                 <h2 className={'text-md font-medium my-2'}>Gejala Yang terjadi :</h2>
-                                <div className={'gejala-terjadi p-3 border rounded-lg md:px-7 ' }>
+                                <div className={'gejala-terjadi p-3 border rounded-lg md:px-7 '}>
                                     <ul className={'list list-inside list-disc'}>
                                         {                                        // @ts-ignore
 
@@ -92,18 +122,18 @@ export default function ResultDiagnose() {
                                                 <li key={index} className={'list-item p-2.5 border-b'}>
                                                     {item}
                                                 </li>
-                                            ))):('Tidak ada Gejala terjadi')
+                                            ))) : ('Tidak ada Gejala terjadi')
                                         }
                                     </ul>
                                 </div>
                             </div>
                             <div className={'Deskripsi my-2'}>
-                            <h2 className={'font-medium text-md my-2 pt-5'}> Tentang Penyakit</h2>
+                                <h2 className={'font-medium text-md my-2 pt-5'}> Tentang Penyakit</h2>
                                 <hr className={'w-4/12 mb-2'}/>
                                 <p className={'text-justify  py-2'} dangerouslySetInnerHTML={
                                     // @ts-ignore
 
-                                    {__html:result?(result.penyakit.definisi):''}}>
+                                    {__html: result ? (result.penyakit.definisi) : ''}}>
 
                                 </p>
                             </div>
@@ -115,7 +145,7 @@ export default function ResultDiagnose() {
                                 <p className={'text-justify py-2'} dangerouslySetInnerHTML={
                                     // @ts-ignore
 
-                                    {__html:result?(result.penyakit.penularan):''}}>
+                                    {__html: result ? (result.penyakit.penularan) : ''}}>
                                     {/*{*/}
                                     {/*    result?(result.penyakit.penularan):'-'*/}
                                     {/*}*/}
@@ -124,10 +154,10 @@ export default function ResultDiagnose() {
                             <div className={'Deskripsi my-2'}>
                                 <h2 className={'font-medium text-lg my-2'}> Pencegahan</h2>
                                 <hr className={'w-4/12 mb-2'}/>
-                                <p className={'text-justify py-2'}dangerouslySetInnerHTML={
+                                <p className={'text-justify py-2'} dangerouslySetInnerHTML={
                                     // @ts-ignore
 
-                                    {__html:result?(result.penyakit.pencegahan):''}
+                                    {__html: result ? (result.penyakit.pencegahan) : ''}
                                 }>
                                     {/*{*/}
                                     {/*    result ? (result.penyakit.pencegahan) : '-'*/}
@@ -135,26 +165,34 @@ export default function ResultDiagnose() {
                                 </p>
                             </div>
                             <div className={'my-4'}>
-                                <Link href={'/homepage'} className={'rounded-full bg-primary text-white px-8 py-3'}>Kembali Ke Halaman Utama</Link>
+                                <Link href={'/homepage'} className={'rounded-full bg-primary text-white px-8 py-3'}>Kembali
+                                    Ke Halaman Utama</Link>
                             </div>
                         </div>
-                        <div id={'image'} className={'lg:right-10 lg:top-10 aspect-square p-4'}>
-                            <Image src={'/img/default.png'} className={'rounded-2xl'} alt={'Gambar Penyakit'}
+                        <div id={'image'}
+                             className={'lg:block hidden lg:right-10 lg:top-10 aspect-square p-4 lg:w-3/12'}>
+                            <Image src={
+                                // @ts-ignore
+                                result ? result.penyakit.gambar ? (BE_URL + '/v1/assets?images=' + result.penyakit.gambar) : ('/img/default.png') : ('/img/default.png')
+                            } className={'rounded-2xl'} alt={'Gambar Penyakit'}
                                    width={500} height={250}/>
                             <p className={'py-2'}>
-                                Avian Influenza (Flu Burung)
+                                {
+                                    // @ts-ignore
+                                    result ? result.penyakit.nama_penyakit : ''
+                                }
                             </p>
 
-                            <div className={'persentase flex flex-col my-5 gap-5'}>
+                            <div className={'persentase flex flex-col my-5 gap-5 w-full'}>
                                 <h1 className={'font-bold'}>Presentase Tingkat Kepercayaan : </h1>
-                                <div className={'presentase px-20'}>
+                                <div className={'presentase'}>
                                     {" "}
                                     <CircularProgressbar                                        // @ts-ignore
 
-                                        value={(result ? (result.persentase):(0))}                                        // @ts-ignore
+                                        value={(result ? (result.persentase) : (0))}                                        // @ts-ignore
                                         // @ts-ignore
 
-                                        text={(result ? (result.persentase):(0))+`%`}
+                                        text={(result ? (result.persentase) : (0)) + `%`}
                                     />
                                 </div>
                             </div>

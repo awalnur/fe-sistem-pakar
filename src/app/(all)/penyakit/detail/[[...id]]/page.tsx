@@ -73,7 +73,7 @@ export default function Penyakit() {
                 <div className={"absolute -z-40 xl:w-6/12 right-0 bg-hero-pattern h-screen bg-cover "}>
                 </div>
 
-                <div className={'relative w-full top-20 xl:px-64 xl:py-16 flex xl:gap-5'}>
+                <div className={'relative w-full top-20 lg:px-8 2xl:px-64 xl:py-16 flex xl:gap-5'}>
                     <div className={'hidden md:flex sticky z-50 top-24 h-fit w-3/12 rounded-xl border'}>
                         <div
                             data-collapsed={isCollapsed}
@@ -200,7 +200,7 @@ export default function Penyakit() {
                             <div id={'image'} className={'hidden md:block lg:right-10 lg:top-10 aspect-square'}>
                                 <Image src={
                                     // @ts-ignore
-                                    detailpenyakit.gambar ? ('/uploads/' + detailpenyakit.gambar) : ('/img/default.png')}
+                                    detailpenyakit.gambar ? (BE_URL+'/v1/assets?images='+detailpenyakit.gambar) : ('/img/default.png')}
                                        className={'rounded-2xl'} alt={'Gambar Penyakit'}
                                        width={500} height={250}/>
                                 <p className={'py-2'}>

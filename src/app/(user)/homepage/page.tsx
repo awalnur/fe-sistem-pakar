@@ -27,6 +27,9 @@ export default function HomePage() {
                         headers: Header()
                     });
                 if (!response.ok) {
+                    if (response.status === 401) {
+                        console.error('auth error!');
+                    }
                     throw new Error('Failed to fetch data');
                 }
                 const datariwayat = await response.json();
@@ -49,7 +52,7 @@ export default function HomePage() {
                 <div className={"fixed w-full -z-40 3xl:w-6/12 lg:w-8/12 right-0 bg-hero-pattern h-screen bg-cover "}>
                 </div>
 
-                <div className={'relative w-full top-20 xl:px-64 p-6 xl:py-16 flex lg:gap-5'}>
+                <div className={'relative w-full top-20  xl:px-64 p-6 xl:py-16 flex lg:gap-5'}>
                     <div className={'hidden md:block sticky z-40 top-24 h-fit w-3/12 rounded-xl border'}>
                         <div
                             data-collapsed={isCollapsed}
