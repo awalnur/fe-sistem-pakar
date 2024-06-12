@@ -1,5 +1,6 @@
 ## FE AGRI CHICKEN HEALTH
-
+## prerequisites
+  - node v18.19.1 or later
 ## Running locally in development mode
 
 To get started, just clone the repository and run `npm install && npm run dev`:
