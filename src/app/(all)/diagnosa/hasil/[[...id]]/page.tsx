@@ -14,6 +14,7 @@ const BE_URL = process.env.NEXT_PUBLIC_BE_URL
 export default function ResultDiagnose() {
     const [result, setData] = useState(null);
     const [isLoading, setLoading] = useState(true);
+    const [jsonData, setJsonData] = useState([]);
 
     const router = usePathname().split('/')
     const login = cekLogin()
@@ -37,6 +38,10 @@ export default function ResultDiagnose() {
                     throw new Error('Failed to fetch data');
                 }
                 const result = await response.json();
+                console.log(result)
+                const data = JSON.parse(result['data'].other);
+
+                setJsonData(data)
                 setData(result['data']);
                 setLoading(false);
             } catch (error) {
@@ -194,6 +199,26 @@ export default function ResultDiagnose() {
 
                                         text={(result ? (result.persentase) : (0)) + `%`}
                                     />
+                                </div>
+                            </div>
+                            <hr className={'my-2'}/>
+                            <div className={'asd'}>
+                                <h1 className={'text-sm'}>Penyakit Lain yang mungkin terjadi</h1>
+                                <div className={''}>
+                                    <div>
+                                        <ul>
+                                            <li className={'flex flex-row justify-between py-2 border-b'}>
+                                                <div>
+                                                    <b>
+                                                        Nama
+                                                    </b>
+                                                </div>
+                                                <div>
+                                                    <b>10%</b>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
