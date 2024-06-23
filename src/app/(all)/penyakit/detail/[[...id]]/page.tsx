@@ -133,7 +133,7 @@ export default function Penyakit() {
                                 <div id={'image'} className={' md:hidden lg:right-10 lg:top-10 aspect-square'}>
                                     <Image src={
                                         // @ts-ignore
-                                        detailpenyakit.gambar ? ('/uploads/' + detailpenyakit.gambar) : ('/img/default.png')}
+                                        detailpenyakit.gambar ? (BE_URL+'/v1/assets?images='+detailpenyakit.gambar) : ('/img/default.png')}
                                            className={'rounded-2xl'} alt={'Gambar Penyakit'}
                                            width={500} height={250}/>
                                     <p className={'py-2'}>
