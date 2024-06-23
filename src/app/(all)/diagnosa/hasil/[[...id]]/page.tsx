@@ -58,6 +58,7 @@ export default function ResultDiagnose() {
     // @ts-ignore
     // @ts-ignore
     // @ts-ignore
+    // @ts-ignore
     return (
         <main className="block">
             <div className="flex w-full min-h-screen flex-col items-center justify-between z-10 top-0 left-0 pb-24 md:px-16 px-4 ">
@@ -113,6 +114,37 @@ export default function ResultDiagnose() {
 
                                             text={(result ? (result.persentase) : (0)) + `%`}
                                         />
+                                    </div>
+                                    <hr className={'my-2'}/>
+                                    <div className={'asd'}>
+                                        <h1 className={'text-sm'}>Penyakit Lain yang mungkin terjadi</h1>
+                                        <div className={''}>
+                                            <div>
+                                                <ul>
+                                                    {
+                                                        jsonData.length > 0 ? jsonData.map((item, index) => (
+                                                            // eslint-disable-next-line react/jsx-key
+                                                            <li className={'flex flex-row justify-between py-2 border-b'}>
+                                                                <div>
+                                                                    <b>
+                                                                        {
+                                                                            // @ts-ignore
+                                                                            item.penyakit
+                                                                        }
+                                                                    </b>
+                                                                </div>
+                                                                <div>
+                                                                    <b>{
+                                                                        // @ts-ignore
+                                                                        (item.bel * 100)
+                                                                    }%</b>
+                                                                </div>
+                                                            </li>
+                                                        )) : ('')
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -207,16 +239,27 @@ export default function ResultDiagnose() {
                                 <div className={''}>
                                     <div>
                                         <ul>
-                                            <li className={'flex flex-row justify-between py-2 border-b'}>
-                                                <div>
-                                                    <b>
-                                                        Nama
-                                                    </b>
-                                                </div>
-                                                <div>
-                                                    <b>10%</b>
-                                                </div>
-                                            </li>
+                                            {
+                                                jsonData.length > 0 ? jsonData.map((item, index) => (
+                                                    // eslint-disable-next-line react/jsx-key
+                                                    <li className={'flex flex-row justify-between py-2 border-b'}>
+                                                        <div>
+                                                            <b>
+                                                                {
+                                                                    // @ts-ignore
+                                                                    item.penyakit
+                                                                }
+                                                            </b>
+                                                        </div>
+                                                        <div>
+                                                            <b>{
+                                                                // @ts-ignore
+                                                                (item.bel*100)
+                                                            }%</b>
+                                                        </div>
+                                                    </li>
+                                                )):('')
+                                            }
                                         </ul>
                                     </div>
                                 </div>
