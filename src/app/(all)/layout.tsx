@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
       <body className="font-inter">
       {isShowAside?(
-      <div className={'fixed h-full w-full z-40 bg-[#00000080] backdrop-blur'} >
+      <div className={'fixed h-full w-full z-40 bg-[#00000080] backdrop-blur no-print'} >
         <aside className={"fixed inset-0 h-full top-0 p-10 pt-20 flex flex-col gap-5 z-50 left-0 w-5/6 bg-white"}>
 
           <Link onClick={()=>setIsShowAside(prevState => !prevState)} href="/">Home</Link>
@@ -70,7 +70,7 @@ export default function RootLayout({ children }) {
 
       </div>
           ):''}
-      <nav className="fixed backdrop-blur border-b-[#f0f0f050] border-b top-0 z-50 flex w-full bg-transparent px-5 py-3 lg:px-16 lg:py-3 2xl:px-64">
+      <nav className="no-print fixed backdrop-blur border-b-[#f0f0f050] border-b top-0 z-50 flex w-full bg-transparent px-5 py-3 lg:px-16 lg:py-3 2xl:px-64">
         <div className="flex flex-wrap md:hidden items-center justify-center w-fit">
           <Button className={'text-black'} variant={'ghost'} onClick={()=>setIsShowAside(prevState => !prevState)}><ListCollapse/></Button>
         </div>

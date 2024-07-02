@@ -10,6 +10,7 @@ import {usePathname} from "next/navigation";
 import {Header} from "@/lib/header";
 import {cekLogin} from "@/lib/cekLogin";
 import Link from "next/link";
+import {Button} from "@/components/ui/button";
 const BE_URL = process.env.NEXT_PUBLIC_BE_URL
 export default function ResultDiagnose() {
     const [result, setData] = useState(null);
@@ -154,7 +155,6 @@ export default function ResultDiagnose() {
                                 <div className={'gejala-terjadi p-3 border rounded-lg md:px-7 '}>
                                     <ul className={'list list-inside list-disc'}>
                                         {                                        // @ts-ignore
-
                                             result ? (result.gejala.map((item, index) => (
                                                 <li key={index} className={'list-item p-2.5 border-b'}>
                                                     {item}
@@ -169,12 +169,9 @@ export default function ResultDiagnose() {
                                 <hr className={'w-4/12 mb-2'}/>
                                 <p className={'text-justify  py-2'} dangerouslySetInnerHTML={
                                     // @ts-ignore
-
                                     {__html: result ? (result.penyakit.definisi) : ''}}>
-
                                 </p>
                             </div>
-
 
                             <div className={'Deskripsi my-2'}>
                                 <h2 className={'font-medium text-lg my-2'}> Penularan</h2>
@@ -204,6 +201,7 @@ export default function ResultDiagnose() {
                             <div className={'my-4'}>
                                 <Link href={'/homepage'} className={'rounded-full bg-primary text-white px-8 py-3'}>Kembali
                                     Ke Halaman Utama</Link>
+                                <Button className={'rounded-full ml-2'} onClick={()=>window.print()}>Print </Button>
                             </div>
                         </div>
                         <div id={'image'}
