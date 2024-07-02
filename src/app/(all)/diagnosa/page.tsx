@@ -427,7 +427,8 @@ return (
                                 <div
                                     className={'flex pt-5 sticky bottom-0 pb-6 rounded-b-xl backdrop-blur -mx-14 px-16 justify-end '}>
                                     <Button type={'submit'}
-                                            className={'rounded-full bg-gradient-to-bl from-green-900 to-green-600 border-orange-700 px-8 py-2'}> Diagnosa</Button>
+                                            className={'rounded-full bg-green-600 px-8 py-2'}> Diagnosa</Button>
+
                                 </div>
                             </form>
                         </Form>

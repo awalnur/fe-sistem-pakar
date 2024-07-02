@@ -2,6 +2,7 @@
 import React from "react";
 
 import {Card} from "@/components/ui/card";
+import {Button} from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -22,7 +23,9 @@ export default function Home() {
                 Temukan penyakit yang diderita ayam berdasarkan gejala yang terjadi menggunakan <b>AGRI</b>.
 
                 Lebih cepat temukan masalah, lebih tepat penanganannya.
+
               </p>
+
             </div>
           </Card>
 
